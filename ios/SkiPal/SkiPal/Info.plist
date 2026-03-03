@@ -24,6 +24,9 @@
     <dict>
         <key>UIApplicationSupportsMultipleScenes</key>
         <false/>
+    <!-- 联系人权限 (紧急联系人) -->
+    <key>NSContactsUsageDescription</key>
+    <string>SkiPal 需要访问联系人来选择紧急联系人。</string>
     </dict>
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>
@@ -87,5 +90,8 @@
         <string>audio</string>
         <string>processing</string>
     </array>
+    <!-- 联系人权限 (紧急联系人) -->
+    <key>NSContactsUsageDescription</key>
+    <string>SkiPal 需要访问联系人来选择紧急联系人。</string>
 </dict>
 </plist>
