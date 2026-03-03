@@ -63,3 +63,8 @@ struct SkiPalApp: App {
         }
     }
 }
+
+// MARK: - Version Info
+/// SkiPal Version: 1.0.0
+/// Build: 2026.03.03
+/// Phase 3 Complete
