@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HistoryView: View {
     @EnvironmentObject var skiSessionStore: SkiSessionStore
+    @StateObject private var syncService = CloudKitSyncService.shared
     @State private var selectedSession: SkiSession?
     @State private var showingDeleteConfirmation = false
     @State private var sessionToDelete: SkiSession?
@@ -16,6 +17,9 @@ struct HistoryView: View {
     var body: some View {
         NavigationView {
             List {
+                // 同步状态
+                SyncStatusSection()
+                
                 // 统计摘要
                 SummarySection()
                 
@@ -41,7 +45,9 @@ struct HistoryView: View {
             .alert("确认删除？", isPresented: $showingDeleteConfirmation) {
                 Button("删除", role: .destructive) {
                     if let session = sessionToDelete {
-                        skiSessionStore.deleteSession(session)
+                        Task {
+                            await skiSessionStore.deleteSessionWithSync(session)
+                        }
                     }
                 }
                 Button("取消", role: .cancel) {}
@@ -54,10 +60,40 @@ struct HistoryView: View {
                 }
             }
         }
+        .task {
+            // 启动时从 iCloud 加载会话
+            await skiSessionStore.loadSessionsFromCloud()
+        }
     }
     
     private func deleteSessions(at offsets: IndexSet) {
-        skiSessionStore.deleteSession(at: offsets)
+        Task {
+            for index in offsets {
+                let session = skiSessionStore.sessions[index]
+                await skiSessionStore.deleteSessionWithSync(session)
+            }
+        }
+    }
+}
+
+// MARK: - 同步状态区域
+struct SyncStatusSection: View {
+    @ObservedObject var syncService = CloudKitSyncService.shared
+    
+    var body: some View {
+        Section {
+            HStack {
+                SyncStatusView(syncService: syncService)
+                Spacer()
+                
+                if syncService.pendingChanges > 0 {
+                    Text("\(syncService.pendingChanges) 项待同步")
+                        .font(.caption)
+                        .foregroundColor(.orange)
+                }
+            }
+            .padding(.vertical, 4)
+        }
     }
 }
 

@@ -36,8 +36,11 @@ class RecordingService: ObservableObject {
     @Published var currentPath: [SkiLocation] = []
     @Published var currentDistance: Double = 0
     @Published var currentDuration: TimeInterval = 0
+    @Published var detectedResort: SkiResort?
+    @Published var nearbyResorts: [SkiResort] = []
     
     private var locationService: LocationService
+    private var resortDatabase: SkiResortDatabase
     private var cancellables = Set<AnyCancellable>()
     private var timer: Timer?
     private var startTime: Date?
@@ -47,8 +50,9 @@ class RecordingService: ObservableObject {
     var isPaused: Bool { state.isPaused }
     var hasPausedRecording: Bool { isPaused || (isRecording && pausedDuration > 0) }
     
-    init(locationService: LocationService) {
+    init(locationService: LocationService, resortDatabase: SkiResortDatabase = .shared) {
         self.locationService = locationService
+        self.resortDatabase = resortDatabase
         setupBindings()
     }
     
@@ -59,6 +63,7 @@ class RecordingService: ObservableObject {
             .filter { [weak self] _ in self?.state.isRecording ?? false }
             .sink { [weak self] location in
                 self?.addLocation(location)
+                self?.detectNearbyResort(location: location)
             }
             .store(in: &cancellables)
     }
@@ -123,7 +128,7 @@ class RecordingService: ObservableObject {
             session = SkiSession(
                 startTime: startTime,
                 locations: currentPath,
-                resortName: detectResortName()
+                resortName: detectedResort?.name
             )
             session?.endTime = Date()
             
@@ -139,7 +144,7 @@ class RecordingService: ObservableObject {
         // 恢复屏幕自动锁定
         UIApplication.shared.isIdleTimerDisabled = false
         
-        print("⏹️ 结束记录")
+        print("⏹️ 结束记录，雪场：\(detectedResort?.name ?? "未知")")
         return session
     }
     
@@ -154,6 +159,19 @@ class RecordingService: ObservableObject {
             let lastIndex = currentPath.count - 1
             let distance = skiLocation.location.distance(from: currentPath[lastIndex - 1].location)
             currentDistance += distance
+        }
+    }
+    
+    private func detectNearbyResort(location: CLLocation) {
+        // 使用雪场数据库检测附近雪场 (5km 范围)
+        resortDatabase.detectNearbyResorts(location: location, radius: 5000)
+        
+        // 更新检测到的雪场
+        if let closest = resortDatabase.nearbyResorts.first {
+            DispatchQueue.main.async {
+                self.detectedResort = closest
+                self.nearbyResorts = self.resortDatabase.nearbyResorts
+            }
         }
     }
     
@@ -172,27 +190,6 @@ class RecordingService: ObservableObject {
     private func updateDuration() {
         guard case .recording(let startTime) = state else { return }
         currentDuration = Date().timeIntervalSince(startTime) - pausedDuration
-    }
-    
-    private func detectResortName() -> String? {
-        // 简化实现：基于位置检测雪场名称
-        // 实际应用应该使用雪场数据库或地理围栏
-        guard let location = locationService.currentLocation else { return nil }
-        
-        let lat = location.coordinate.latitude
-        let lon = location.coordinate.longitude
-        
-        // 示例：检测一些知名雪场（简化版）
-        // 南山滑雪场 (北京) ~ 40.3, 116.6
-        if abs(lat - 40.3) < 0.1 && abs(lon - 116.6) < 0.1 {
-            return "南山滑雪场"
-        }
-        // 万龙滑雪场 (崇礼) ~ 40.9, 115.4
-        if abs(lat - 40.9) < 0.1 && abs(lon - 115.4) < 0.1 {
-            return "万龙滑雪场"
-        }
-        
-        return nil
     }
     
     deinit {

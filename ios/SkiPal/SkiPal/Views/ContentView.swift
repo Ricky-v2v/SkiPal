@@ -11,6 +11,8 @@ struct ContentView: View {
     @EnvironmentObject var locationService: LocationService
     @EnvironmentObject var recordingService: RecordingService
     @EnvironmentObject var skiSessionStore: SkiSessionStore
+    @EnvironmentObject var resortDatabase: SkiResortDatabase
+    @EnvironmentObject var weatherService: WeatherService
     
     @State private var selectedTab = 0
     @State private var showingSessionDetail: SkiSession?
@@ -39,12 +41,19 @@ struct ContentView: View {
                 }
                 .tag(2)
             
+            // 雪场天气
+            WeatherView(weatherService: weatherService, resortDatabase: resortDatabase)
+                .tabItem {
+                    Label("天气", systemImage: "cloud.sun")
+                }
+                .tag(3)
+            
             // 统计概览
             StatisticsView()
                 .tabItem {
                     Label("统计", systemImage: "chart.bar")
                 }
-                .tag(3)
+                .tag(4)
         }
         .accentColor(.blue)
         .sheet(item: $showingSessionDetail) { session in
@@ -69,4 +78,6 @@ struct ContentView: View {
         .environmentObject(LocationService())
         .environmentObject(RecordingService(locationService: LocationService()))
         .environmentObject(SkiSessionStore())
+        .environmentObject(SkiResortDatabase.shared)
+        .environmentObject(WeatherService.shared)
 }

@@ -12,7 +12,7 @@ struct SessionDetailView: View {
     @EnvironmentObject var skiSessionStore: SkiSessionStore
     @Environment(\.dismiss) private var dismiss
     
-    @State private var showingShareSheet = false
+    @State private var showingShareCard = false
     @State private var showingDeleteConfirmation = false
     
     var body: some View {
@@ -32,7 +32,7 @@ struct SessionDetailView: View {
                     }
                     
                     // 分享按钮
-                    ShareButton(session: session)
+                    ShareButton(session: session, showingShareCard: $showingShareCard)
                     
                     // 删除按钮
                     DeleteButton {
@@ -50,12 +50,14 @@ struct SessionDetailView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showingShareSheet) {
-                ShareSheet(items: [skiSessionStore.generateShareText(for: session)])
+            .sheet(isPresented: $showingShareCard) {
+                ShareCardView(session: session)
             }
             .alert("确认删除？", isPresented: $showingDeleteConfirmation) {
                 Button("删除", role: .destructive) {
-                    skiSessionStore.deleteSession(session)
+                    Task {
+                        await skiSessionStore.deleteSessionWithSync(session)
+                    }
                     dismiss()
                 }
                 Button("取消", role: .cancel) {}
@@ -201,16 +203,16 @@ struct StatRow: View {
 // MARK: - 分享按钮
 struct ShareButton: View {
     let session: SkiSession
-    @State private var showingShareSheet = false
+    @Binding var showingShareCard: Bool
     
     var body: some View {
         Button(action: {
-            showingShareSheet = true
+            showingShareCard = true
         }) {
             HStack(spacing: 12) {
-                Image(systemName: "square.and.arrow.up")
+                Image(systemName: "photo.on.rectangle")
                     .font(.title3)
-                Text("分享成绩")
+                Text("生成分享卡片")
                     .font(.headline)
             }
             .foregroundStyle(.white)
@@ -227,10 +229,6 @@ struct ShareButton: View {
             .shadow(color: .blue.opacity(0.3), radius: 10, x: 0, y: 5)
         }
         .padding(.horizontal)
-        .sheet(isPresented: $showingShareSheet) {
-            let store = SkiSessionStore()
-            ShareSheet(items: [store.generateShareText(for: session)])
-        }
     }
 }
 
@@ -254,15 +252,29 @@ struct DeleteButton: View {
     }
 }
 
-// MARK: - 分享Sheet
-struct ShareSheet: UIViewControllerRepresentable {
-    let items: [Any]
+// MARK: - 轨迹预览
+struct TrajectoryPreview: View {
+    let locations: [SkiLocation]
     
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("滑行轨迹")
+                .font(.headline)
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(.systemGray6))
+                
+                // 简化的轨迹显示 (实际应该使用 MapKit)
+                Text("🗺️ 轨迹预览")
+                    .foregroundColor(.secondary)
+            }
+            .frame(height: 200)
+        }
+        .padding()
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
-    
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
 
 #Preview {
