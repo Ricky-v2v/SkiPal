@@ -3,8 +3,10 @@ import PackageDescription
 
 let package = Package(
     name: "SkiPal",
+    defaultLocalization: "zh-Hans",
     platforms: [
-        .iOS(.v17)
+        .iOS(.v17),
+        .watchOS(.v10)
     ],
     products: [
         .library(
@@ -12,14 +14,22 @@ let package = Package(
             targets: ["SkiPal"]
         ),
     ],
-    dependencies: [
-        // 目前使用系统框架，无需外部依赖
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "SkiPal",
             dependencies: [],
-            path: "SkiPal"
+            path: "SkiPal",
+            resources: [
+                .process("Assets.xcassets"),
+                .process("Base.lproj"),
+                .process("Resources")
+            ]
+        ),
+        .testTarget(
+            name: "SkiPalTests",
+            dependencies: ["SkiPal"],
+            path: "SkiPalTests"
         ),
     ]
 )
