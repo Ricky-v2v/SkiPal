@@ -447,7 +447,7 @@ extension WatchConnectivityService {
 
 // MARK: - watchOS 特定扩展
 #if os(watchOS)
-import WatchKit
+// import WatchKit // Only needed for Watch Extension
 
 extension WatchConnectivityService {
     /// 请求 iPhone 开始录制

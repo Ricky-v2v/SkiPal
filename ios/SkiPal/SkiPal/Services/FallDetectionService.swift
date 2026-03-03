@@ -462,7 +462,7 @@ extension FallDetectionService {
 
 // MARK: - watchOS 特定扩展
 #if os(watchOS)
-import WatchKit
+// import WatchKit // Only needed for Watch Extension
 
 extension FallDetectionService {
     /// Watch 端触发跌倒（手动报告）

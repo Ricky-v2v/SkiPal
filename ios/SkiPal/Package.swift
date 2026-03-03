@@ -24,6 +24,9 @@ let package = Package(
                 .process("Assets.xcassets"),
                 .process("Base.lproj"),
                 .process("Resources")
+            ],
+            swiftSettings: [
+                .define("IOS_BUILD")
             ]
         ),
         .testTarget(
