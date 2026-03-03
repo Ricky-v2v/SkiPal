@@ -1,0 +1,32 @@
+name: SkiPal
+options:
+  bundleIdPrefix: com.skipal
+  deploymentTarget:
+    iOS: "17.0"
+    watchOS: "10.0"
+  xcodeVersion: "15.0"
+
+settings:
+  base:
+    PRODUCT_NAME: SkiPal
+    PRODUCT_BUNDLE_IDENTIFIER: com.skipal.app
+    SWIFT_VERSION: "5.9"
+    TARGETED_DEVICE_FAMILY: "1,2"
+
+targets:
+  SkiPal:
+    type: application
+    platform: iOS
+    sources:
+      - path: SkiPal
+        excludes:
+          - "**/.DS_Store"
+          - "**/._*"
+    settings:
+      base:
+        INFOPLIST_FILE: SkiPal/Info.plist
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        ENABLE_PREVIEWS: YES
+    info:
+      path: SkiPal/Info.plist

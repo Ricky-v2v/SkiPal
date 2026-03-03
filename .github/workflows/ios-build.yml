@@ -13,13 +13,24 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Install xcodegen
+      run: brew install xcodegen
+    
+    - name: Generate Xcode project
+      run: |
+        cd ios/SkiPal
+        xcodegen generate
+    
     - name: Show Xcode version
       run: xcodebuild -version
     
-    - name: Build iOS App (SPM)
+    - name: Build iOS App
       run: |
         cd ios/SkiPal
-        swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "arm64-apple-ios17.0-simulator"
+        xcodebuild -project SkiPal.xcodeproj \
+          -scheme SkiPal \
+          -destination 'platform=iOS Simulator,name=iPhone 15' \
+          clean build
     
     - name: Check build result
-      run: echo "Build completed"
+      run: echo "Build completed successfully!"
