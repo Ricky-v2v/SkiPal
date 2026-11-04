@@ -20,3 +20,15 @@ Pods/
 
 # Carthage
 Carthage/Build/
+
+# 敏感信息与本地凭证（禁止提交）
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.cer
+*.mobileprovision
+*.provisionprofile
+*.xcuserstate
+secrets/
