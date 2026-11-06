@@ -1,3 +1,7 @@
+# @Input      ios/SkiPal 下的 SkiPal、SkiPalTests、WatchApp/WatchApp 源码目录
+# @Output     xcodegen generate 生成 SkiPal.xcodeproj（SkiPal、SkiPalWatch、SkiPalTests 三个 target）
+# @Pos        工程生成源；project.pbxproj 由此生成，不手改
+# @UpdateRule 修改 target、设置或目录时同步此头、ios/SkiPal/README.md 与 docs/architecture.md
 name: SkiPal
 options:
   bundleIdPrefix: com.skipal
@@ -14,6 +18,8 @@ settings:
     TARGETED_DEVICE_FAMILY: "1,2"
 
 targets:
+  # iOS 主应用
+  # 注意：Info.plist 手工维护（含权限描述），因此不使用 xcodegen 的 info: 段，避免生成时被覆盖
   SkiPal:
     type: application
     platform: iOS
@@ -28,5 +34,54 @@ targets:
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: ""
         ENABLE_PREVIEWS: YES
-    info:
-      path: SkiPal/Info.plist
+    dependencies:
+      - target: SkiPalWatch
+        embed: true
+
+  # Apple Watch 应用
+  SkiPalWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: WatchApp/WatchApp
+        excludes:
+          - "**/.DS_Store"
+          - "**/._*"
+    settings:
+      base:
+        INFOPLIST_FILE: WatchApp/WatchApp/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.skipal.app.watchkitapp
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        SKIP_INSTALL: YES
+
+  # 单元测试
+  SkiPalTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: SkiPalTests
+    dependencies:
+      - target: SkiPal
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.skipal.app.tests
+        # 全局 PRODUCT_NAME 是 SkiPal，测试 target 需要独立模块名，避免与 App 的 swiftmodule 冲突
+        PRODUCT_NAME: SkiPalTests
+        PRODUCT_MODULE_NAME: SkiPalTests
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  SkiPal:
+    build:
+      targets:
+        SkiPal: all
+        SkiPalWatch: all
+        SkiPalTests: [test]
+    test:
+      targets:
+        - SkiPalTests
+    run:
+      config: Debug

@@ -51,31 +51,31 @@
     
     <!-- 定位权限描述 -->
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>SkiPal 需要您的位置来记录滑雪轨迹和计算速度、距离等数据。</string>
+    <string>SkiPal uses your location to record your ski track and calculate speed, distance and other stats.</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>SkiPal 需要后台定位权限，以便在滑雪时持续记录您的轨迹（即使App在后台）。</string>
+    <string>SkiPal needs background location access to keep recording your track while you ski, even when the app is in the background.</string>
     <key>NSLocationAlwaysUsageDescription</key>
-    <string>SkiPal 需要后台定位来完整记录您的滑雪轨迹。</string>
+    <string>SkiPal needs background location access to record your full ski track.</string>
     
     <!-- 运动健身权限 -->
     <key>NSMotionUsageDescription</key>
-    <string>SkiPal 使用运动传感器来优化滑雪检测。</string>
+    <string>SkiPal uses motion sensors to improve ski activity detection.</string>
 
     <!-- 联系人权限 -->
     <key>NSContactsUsageDescription</key>
-    <string>SkiPal 需要访问联系人来选择紧急联系人。</string>
+    <string>SkiPal accesses your contacts so you can pick an emergency contact.</string>
 
     <!-- 相机和麦克风权限 -->
     <key>NSCameraUsageDescription</key>
-    <string>SkiPal 需要访问摄像头来录制滑雪视频，记录您的精彩瞬间。</string>
+    <string>SkiPal uses the camera to record your skiing videos and capture your best moments.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>SkiPal 需要访问麦克风来录制视频中的音频。</string>
+    <string>SkiPal uses the microphone to capture audio for your videos.</string>
 
     <!-- 照片库权限 -->
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>SkiPal 需要访问相册来查看和分享您的滑雪视频。</string>
+    <string>SkiPal accesses your photo library to view and share your skiing videos.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>SkiPal 需要保存滑雪视频到相册。</string>
+    <string>SkiPal saves your skiing videos to your photo library.</string>
 
     <!-- 后台模式 -->
     <key>UIBackgroundModes</key>

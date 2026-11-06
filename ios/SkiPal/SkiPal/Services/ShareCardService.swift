@@ -8,6 +8,8 @@
 import UIKit
 import CoreLocation
 import MapKit
+import CoreGraphics
+import Combine
 
 /// 分享卡片模板
 enum ShareCardTemplate: String, CaseIterable, Identifiable {
@@ -49,7 +51,7 @@ enum ShareCardTemplate: String, CaseIterable, Identifiable {
 }
 
 /// 分享卡片服务
-class ShareCardService {
+final class ShareCardService: ObservableObject {
     static let shared = ShareCardService()
     
     private init() {}
@@ -113,7 +115,7 @@ class ShareCardService {
     // MARK: - 绘制辅助方法
     
     private func drawGradient(ctx: CGContext, size: CGSize, template: ShareCardTemplate) {
-        guard let colorSpace = CGColorSpaceCreateGenericRGB().into() else { return }
+        guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB) else { return }
         
         let colors = [
             template.primaryColor.cgColor,
@@ -146,7 +148,7 @@ class ShareCardService {
             UIColor.clear.cgColor,
             UIColor.black.withAlphaComponent(0.3).cgColor
         ] as CFArray
-        guard let colorSpace = CGColorSpaceCreateGenericRGB().into(),
+        guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB),
               let gradient = CGGradient(colorsSpace: colorSpace, colors: gradientColors, locations: [0, 1]) else {
             ctx.restoreGState()
             return
@@ -202,7 +204,7 @@ class ShareCardService {
             
             // 数值
             let valueAttrs: [NSAttributedString.Key: Any] = [
-                .font: UIFont.boldSystemFont(ofSize: 42, weight: .bold),
+                .font: UIFont.systemFont(ofSize: 42, weight: .bold),
                 .foregroundColor: template.accentColor
             ]
             stat.1.draw(at: CGPoint(x: x, y: y + 50), withAttributes: valueAttrs)
@@ -230,7 +232,7 @@ class ShareCardService {
         // 成就标题
         let titleY = starsY + starSize + 20
         let titleAttrs: [NSAttributedString.Key: Any] = [
-            .font: UIFont.boldSystemFont(ofSize: 36, weight: .semibold),
+            .font: UIFont.systemFont(ofSize: 36, weight: .semibold),
             .foregroundColor: template.textColor
         ]
         title.draw(at: CGPoint(x: (size.width - title.size(withAttributes: titleAttrs).width) / 2, y: titleY), withAttributes: titleAttrs)
@@ -240,7 +242,7 @@ class ShareCardService {
         // 雪场名称
         let resortName = session.resortName ?? "滑雪记录"
         let nameAttrs: [NSAttributedString.Key: Any] = [
-            .font: UIFont.boldSystemFont(ofSize: 56, weight: .bold),
+            .font: UIFont.systemFont(ofSize: 56, weight: .bold),
             .foregroundColor: template.textColor
         ]
         let nameRect = CGRect(x: 40, y: size.height * 0.38, width: size.width - 80, height: 80)
@@ -263,7 +265,7 @@ class ShareCardService {
         
         // SkiPal Logo
         let logoAttrs: [NSAttributedString.Key: Any] = [
-            .font: UIFont.boldSystemFont(ofSize: 40, weight: .bold),
+            .font: UIFont.systemFont(ofSize: 40, weight: .bold),
             .foregroundColor: template.secondaryColor
         ]
         let logoText = "🎿 SkiPal"

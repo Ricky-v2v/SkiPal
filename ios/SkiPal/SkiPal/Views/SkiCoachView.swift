@@ -123,7 +123,7 @@ struct OverallScoreCard: View {
             }
 
             // 等级标签
-            Text(analysis.scoreLevel.rawValue)
+            Text(LocalizedStringKey(analysis.scoreLevel.rawValue))
                 .font(.headline)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
@@ -186,7 +186,7 @@ struct ComparisonItem: View {
                 .fontWeight(.bold)
                 .foregroundColor(value >= 0 ? .green : .red)
 
-            Text(label)
+            Text(LocalizedStringKey(label))
                 .font(.caption2)
                 .foregroundColor(.gray)
         }
@@ -242,7 +242,7 @@ struct ScoreRow: View {
                 .foregroundColor(color)
                 .frame(width: 24)
 
-            Text(label)
+            Text(LocalizedStringKey(label))
                 .foregroundColor(.white)
 
             Spacer()
@@ -333,7 +333,7 @@ struct RadarChartView: View {
                         y: center.y + sin(angle) * (radius + 20)
                     )
 
-                    Text(scores[i].0)
+                    Text(LocalizedStringKey(scores[i].0))
                         .font(.caption)
                         .foregroundColor(.gray)
                         .position(labelPoint)
@@ -372,11 +372,11 @@ struct SuggestionCard: View {
                     .frame(width: 24)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(suggestion.title)
+                    Text(LocalizedStringKey(suggestion.title))
                         .font(.headline)
                         .foregroundColor(.white)
 
-                    Text(suggestion.category.rawValue)
+                    Text(LocalizedStringKey(suggestion.category.rawValue))
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
@@ -384,7 +384,7 @@ struct SuggestionCard: View {
                 Spacer()
 
                 // 优先级标签
-                Text(priorityText(suggestion.priority))
+                Text(LocalizedStringKey(priorityText(suggestion.priority)))
                     .font(.caption2)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
@@ -394,7 +394,7 @@ struct SuggestionCard: View {
             }
 
             // 描述
-            Text(suggestion.description)
+            Text(LocalizedStringKey(suggestion.description))
                 .font(.subheadline)
                 .foregroundColor(.gray)
 
@@ -404,7 +404,7 @@ struct SuggestionCard: View {
                     .foregroundColor(.yellow)
                     .font(.caption)
 
-                Text(suggestion.action)
+                Text(LocalizedStringKey(suggestion.action))
                     .font(.caption)
                     .foregroundColor(.white)
             }
@@ -478,12 +478,12 @@ struct InsightCard: View {
 
             // 内容
             VStack(alignment: .leading, spacing: 4) {
-                Text(insight.title)
+                Text(LocalizedStringKey(insight.title))
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .foregroundColor(.white)
 
-                Text(insight.detail)
+                Text(LocalizedStringKey(insight.detail))
                     .font(.caption)
                     .foregroundColor(.gray)
             }
@@ -526,13 +526,13 @@ struct TrainingPlanView: View {
             // 计划概览
             VStack(spacing: 12) {
                 HStack {
-                    Text(plan.title)
+                    Text(LocalizedStringKey(plan.title))
                         .font(.headline)
                         .foregroundColor(.white)
 
                     Spacer()
 
-                    Text(plan.difficulty.rawValue)
+                    Text(LocalizedStringKey(plan.difficulty.rawValue))
                         .font(.caption)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
@@ -553,7 +553,7 @@ struct TrainingPlanView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
                         ForEach(plan.focusAreas, id: \.self) { area in
-                            Text(area.rawValue)
+                            Text(LocalizedStringKey(area.rawValue))
                                 .font(.caption)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 4)
@@ -604,7 +604,7 @@ struct ExerciseRow: View {
             Button(action: onToggle) {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(exercise.name)
+                        Text(LocalizedStringKey(exercise.name))
                             .font(.subheadline)
                             .foregroundColor(.white)
 
@@ -622,7 +622,7 @@ struct ExerciseRow: View {
             }
 
             if isExpanded {
-                Text(exercise.description)
+                Text(LocalizedStringKey(exercise.description))
                     .font(.caption)
                     .foregroundColor(.gray)
                     .padding(.top, 4)

@@ -36,6 +36,11 @@ enum VideoRecordingState {
         if case .recording = self { return true }
         return false
     }
+
+    var isPaused: Bool {
+        if case .paused = self { return true }
+        return false
+    }
 }
 
 /// 视频会话
@@ -221,6 +226,11 @@ class VideoRecordingService: NSObject, ObservableObject {
     func pauseRecording() {
         guard case .recording = state else { return }
 
+        guard #available(iOS 18.0, *) else {
+            print("⚠️ 当前系统不支持视频暂停，继续录制")
+            return
+        }
+
         videoOutput?.pauseRecording()
         state = .paused
         stopTimer()
@@ -232,6 +242,11 @@ class VideoRecordingService: NSObject, ObservableObject {
     func resumeRecording() {
         guard case .paused = state else { return }
 
+        guard #available(iOS 18.0, *) else {
+            print("⚠️ 当前系统不支持视频继续录制，保持暂停状态")
+            return
+        }
+
         videoOutput?.resumeRecording()
         state = .recording
         startTimer()
@@ -241,7 +256,7 @@ class VideoRecordingService: NSObject, ObservableObject {
 
     /// 停止录制
     func stopRecording() {
-        guard case .recording = state || .paused = state else { return }
+        guard state.isRecording || state.isPaused else { return }
 
         state = .saving
         videoOutput?.stopRecording()
@@ -467,7 +482,7 @@ extension VideoRecordingService: AVCaptureFileOutputRecordingDelegate {
         }
 
         // 关联滑雪会话
-        if let skiSession = recordingService?.state.isActive == true {
+        if recordingService?.state.isActive == true {
             // 可以在这里关联当前滑雪会话
         }
 
@@ -623,8 +638,8 @@ extension VideoOverlayRenderer {
         let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
 
         // 创建叠加图像
-        guard let overlayImage = createOverlayImage(overlayData),
-              let overlayCI = CIImage(image: overlayImage) else {
+        // createOverlayImage 已直接返回 CIImage，无需再做一次 UIImage 转换
+        guard let overlayCI = createOverlayImage(overlayData) else {
             return pixelBuffer
         }
 
@@ -697,7 +712,13 @@ extension VideoSession: Codable {
         if let lat = try container.decodeIfPresent(Double.self, forKey: .latitude),
            let lon = try container.decodeIfPresent(Double.self, forKey: .longitude),
            let alt = try container.decodeIfPresent(Double.self, forKey: .altitude) {
-            location = CLLocation(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon), altitude: alt)
+            location = CLLocation(
+                coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon),
+                altitude: alt,
+                horizontalAccuracy: 5,
+                verticalAccuracy: 5,
+                timestamp: endTime ?? Date()
+            )
         }
     }
 

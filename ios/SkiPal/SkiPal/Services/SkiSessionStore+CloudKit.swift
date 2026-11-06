@@ -37,7 +37,7 @@ extension SkiSessionStore {
                 // 按开始时间排序 (最新的在前)
                 mergedSessions.sort { $0.startTime > $1.startTime }
                 self.sessions = mergedSessions
-                self.updateStatistics()
+                self.updateCloudKitStatistics()
                 
                 print("✅ 从 iCloud 同步完成，共 \(self.sessions.count) 个会话")
             }
@@ -50,9 +50,7 @@ extension SkiSessionStore {
     func deleteSessionWithSync(_ session: SkiSession) async {
         // 先从本地删除
         await MainActor.run {
-            self.sessions.removeAll { $0.id == session.id }
-            self.saveSessions()
-            self.updateStatistics()
+            self.deleteSession(session)
         }
         
         // 然后从云端删除
@@ -61,5 +59,12 @@ extension SkiSessionStore {
         } catch {
             print("❌ 从 iCloud 删除会话失败：\(error.localizedDescription)")
         }
+    }
+
+    /// 统计方法为 SkiSessionStore 的文件私有成员，云同步扩展在这里同步公开统计字段。
+    private func updateCloudKitStatistics() {
+        sessionCount = sessions.count
+        totalDistance = sessions.reduce(0) { $0 + $1.totalDistance }
+        totalDuration = sessions.reduce(0) { $0 + $1.duration }
     }
 }

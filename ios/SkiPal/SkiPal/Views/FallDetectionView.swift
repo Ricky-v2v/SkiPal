@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 /// 摔倒警报视图 - 检测到摔倒后显示
 struct FallAlertView: View {
@@ -177,13 +178,15 @@ struct FallDetectionSettingsView: View {
                 }
 
                 // 灵敏度
-                Section("检测灵敏度") {
+                Section {
                     Picker("灵敏度", selection: $fallDetector.sensitivity) {
                         ForEach(FallDetector.FallSensitivity.allCases, id: \.self) { sensitivity in
                             Text(sensitivity.rawValue).tag(sensitivity)
                         }
                     }
                     .pickerStyle(.segmented)
+                } header: {
+                    Text("检测灵敏度")
                 } footer: {
                     Text("高灵敏度可检测更多摔倒，但可能增加误报")
                 }

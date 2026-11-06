@@ -154,7 +154,7 @@ struct SummaryItem: View {
     let icon: String
     let value: String
     var unit: String? = nil
-    let label: String
+    let label: LocalizedStringKey
     
     var body: some View {
         VStack(spacing: 4) {
@@ -198,7 +198,7 @@ struct HistoryRow: View {
             }
             
             if let resort = session.resortName {
-                Label(resort, systemImage: "mappin.and.ellipse")
+                Label(LocalizedStringKey(resort), systemImage: "mappin.and.ellipse")
                     .font(.caption)
                     .foregroundStyle(.blue)
             }

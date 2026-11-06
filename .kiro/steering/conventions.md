@@ -3,7 +3,7 @@
 ## 通用
 
 - 说明文档、注释使用中文；代码标识符使用英文；界面文案走双语资源（`zh-Hans` / `en`）
-- 单个生产源文件建议控制在 500 行以内，硬上限 1000 行；接近上限时按职责拆成子组件
+- 源文件行数约束、文件头与目录 README 规范见根目录 `AGENTS.md`（§10、§11），此处不重复
 - 不提交 `DerivedData/`、`.build/`、`xcuserdata/`、`.DS_Store`、签名证书与描述文件
 - 不在仓库内写入密钥、令牌、账号密码、个人设备路径或真实联系人信息
 
@@ -17,8 +17,4 @@
 
 ## 提交前检查
 
-```bash
-cd ios/SkiPal && xcodegen generate
-xcodebuild -project ios/SkiPal/SkiPal.xcodeproj -scheme SkiPal \
-  -destination 'platform=iOS Simulator,name=iPhone 15' clean build
-```
+构建与测试命令见 `docs/architecture.md`「构建与测试」；验证与收尾要求见 `AGENTS.md` §7、§8。

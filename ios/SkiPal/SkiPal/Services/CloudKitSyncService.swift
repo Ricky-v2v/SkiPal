@@ -20,11 +20,14 @@ enum SyncStatus: Equatable {
     
     var description: String {
         switch self {
-        case .idle: return "未同步"
-        case .syncing(let progress): return String(format: "同步中 %.0f%%", progress * 100)
-        case .success(let lastSync): return "已同步 • \(formatDate(lastSync))"
-        case .error(let message): return "同步失败：\(message)"
-        case .offline: return "离线模式"
+        case .idle: return NSLocalizedString("未同步", comment: "Sync status")
+        case .syncing(let progress):
+            return String(format: NSLocalizedString("同步中 %.0f%%", comment: "Sync status"), progress * 100)
+        case .success(let lastSync):
+            return String(format: NSLocalizedString("已同步 • %@", comment: "Sync status"), formatDate(lastSync))
+        case .error(let message):
+            return String(format: NSLocalizedString("同步失败：%@", comment: "Sync status"), message)
+        case .offline: return NSLocalizedString("离线模式", comment: "Sync status")
         }
     }
     
@@ -43,7 +46,11 @@ class CloudKitSyncService: ObservableObject {
     
     static let shared = CloudKitSyncService()
     
-    private let database: CKDatabase
+    /// iCloud 私有数据库。
+    ///
+    /// 为 nil 表示当前构建没有可用的 iCloud 能力（缺少 entitlement 或未登录 iCloud），
+    /// 此时所有同步操作会优雅降级，不会崩溃。
+    private let database: CKDatabase?
     private let recordType = "SkiSession"
     private let queue = DispatchQueue(label: "com.skipal.cloudkit", qos: .userInitiated)
     private var networkMonitor: NWPathMonitor?
@@ -52,8 +59,38 @@ class CloudKitSyncService: ObservableObject {
     private var localRecordIDs: [UUID: CKRecord.ID] = [:]
     
     private init() {
-        self.database = CKContainer.default().privateCloudDatabase
+        self.database = Self.makeDatabase()
         setupNetworkMonitoring()
+        if self.database == nil {
+            self.syncStatus = .error(message: "此构建未启用 iCloud 同步")
+            self.isOfflineMode = true
+        }
+    }
+    
+    /// 创建 CloudKit 数据库；当前构建不具备 iCloud 能力时返回 nil。
+    ///
+    /// 注意：`CKContainer` 的任何初始化在缺少 iCloud entitlement 的构建中都会直接
+    /// 触发 fatalError（未捕获异常，应用启动即崩溃）。因此必须先探测 iCloud 身份令牌，
+    /// 确认可用后再触碰 CloudKit API。
+    ///
+    /// 开发者启用 iCloud 的步骤见 QUICKSTART.md：
+    /// 1. 在 Xcode 为 SkiPal target 添加 iCloud capability 并勾选 CloudKit；
+    /// 2. 在 Info.plist 填入 `SkiPalCloudKitContainerIdentifier`（你的容器 ID，
+    ///    例如 `iCloud.com.yourcompany.skipal`），留空则使用默认容器。
+    private static func makeDatabase() -> CKDatabase? {
+        guard FileManager.default.ubiquityIdentityToken != nil else {
+            print("ℹ️ 未检测到 iCloud 身份令牌，跳过 CloudKit 初始化（缺少 entitlement 或未登录 iCloud）")
+            return nil
+        }
+        
+        let container: CKContainer
+        if let identifier = Bundle.main.object(forInfoDictionaryKey: "SkiPalCloudKitContainerIdentifier") as? String,
+           !identifier.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            container = CKContainer(identifier: identifier)
+        } else {
+            container = CKContainer.default()
+        }
+        return container.privateCloudDatabase
     }
     
     deinit {
@@ -80,6 +117,9 @@ class CloudKitSyncService: ObservableObject {
     
     /// 同步单个会话到 CloudKit
     func syncSession(_ session: SkiSession) async throws {
+        guard let database = database else {
+            throw CloudKitUnavailableError.disabled
+        }
         guard !isOfflineMode else {
             print("⚠️ 离线模式，跳过同步")
             return
@@ -92,15 +132,19 @@ class CloudKitSyncService: ObservableObject {
         do {
             // 创建或更新记录
             let record = try await createOrUpdateRecord(for: session)
+            defer {
+                removeTemporaryAssetFiles(from: record)
+            }
             
             // 保存记录
-            try await database.save(record)
+            _ = try await database.save(record)
             
             await MainActor.run {
                 syncStatus = .success(lastSync: Date())
                 print("✅ 会话同步成功：\(session.id)")
             }
-        } catch CKError.networkUnavailable, CKError.networkConnectionFailure {
+        } catch let error as CKError
+            where error.code == .networkUnavailable || error.code == .networkFailure {
             await MainActor.run {
                 isOfflineMode = true
                 syncStatus = .offline
@@ -118,6 +162,9 @@ class CloudKitSyncService: ObservableObject {
     
     /// 从 CloudKit 获取所有会话
     func fetchAllSessions() async throws -> [SkiSession] {
+        guard let database = database else {
+            throw CloudKitUnavailableError.disabled
+        }
         guard !isOfflineMode else {
             return []
         }
@@ -126,14 +173,20 @@ class CloudKitSyncService: ObservableObject {
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         
         do {
-            let results = try await database.fetch(withQuery: query)
-            
             var sessions: [SkiSession] = []
-            for record in results {
-                if let session = decodeSession(from: record) {
-                    sessions.append(session)
-                    localRecordIDs[session.id] = record.recordID
+            var results = try await database.records(matching: query)
+
+            while true {
+                for (_, recordResult) in results.matchResults {
+                    let record = try recordResult.get()
+                    if let session = decodeSession(from: record) {
+                        sessions.append(session)
+                        localRecordIDs[session.id] = record.recordID
+                    }
                 }
+
+                guard let cursor = results.queryCursor else { break }
+                results = try await database.records(continuingMatchFrom: cursor)
             }
             
             print("✅ 从 iCloud 获取 \(sessions.count) 个会话")
@@ -146,12 +199,15 @@ class CloudKitSyncService: ObservableObject {
     
     /// 删除 CloudKit 中的会话
     func deleteSession(_ session: SkiSession) async throws {
+        guard let database = database else {
+            throw CloudKitUnavailableError.disabled
+        }
         guard let recordID = localRecordIDs[session.id] else {
             // 尝试通过查询找到记录 ID
             let query = CKQuery(recordType: recordType, predicate: NSPredicate(format: "sessionID == %@", session.id.uuidString))
-            let results = try await database.fetch(withQuery: query)
+            let results = try await database.records(matching: query)
             
-            if let recordID = results.first?.recordID {
+            if let recordID = results.matchResults.first?.0 {
                 try await database.deleteRecord(withID: recordID)
                 localRecordIDs.removeValue(forKey: session.id)
             }
@@ -175,21 +231,7 @@ class CloudKitSyncService: ObservableObject {
     // MARK: - 私有方法
     
     private func createOrUpdateRecord(for session: SkiSession) async throws -> CKRecord {
-        let recordID = localRecordIDs[session.id] ?? CKRecord.ID(recordName: session.id.uuidString)
-        let record = CKRecord(recordType: recordType, recordID: recordID)
-        
-        // 编码会话数据 - 直接存储 Data 到 CKRecord
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
-        let data = try encoder.encode(session)
-        
-        // 使用 CKRecordValue 协议正确存储数据
-        record["sessionData"] = data
-        record["sessionID"] = session.id.uuidString
-        record["startTime"] = session.startTime
-        record["endTime"] = session.endTime ?? Date()
-        record["resortName"] = session.resortName ?? ""
-        record["modifiedDate"] = Date()
+        let record = session.toCloudKitRecord()
         
         // 缓存记录 ID
         localRecordIDs[session.id] = record.recordID
@@ -198,18 +240,28 @@ class CloudKitSyncService: ObservableObject {
     }
     
     private func decodeSession(from record: CKRecord) -> SkiSession? {
-        guard let sessionData = record["sessionData"] as? Data else {
-            return nil
+        SkiSession.fromCloudKitRecord(record)
+    }
+
+    /// 删除上传完成后不再需要的临时资产文件。
+    private func removeTemporaryAssetFiles(from record: CKRecord) {
+        for key in record.allKeys() {
+            guard let asset = record[key] as? CKAsset, let fileURL = asset.fileURL else {
+                continue
+            }
+            try? FileManager.default.removeItem(at: fileURL)
         }
-        
-        do {
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            return try decoder.decode(SkiSession.self, from: sessionData)
-        } catch {
-            print("❌ 解码会话失败：\(error.localizedDescription)")
+    }
+}
+
+/// iCloud 同步不可用时的错误（当前构建未配置 iCloud 能力）
+enum CloudKitUnavailableError: LocalizedError {
+    case disabled
+    
+    var errorDescription: String? {
+        switch self {
+        case .disabled:
+            return "此构建未启用 iCloud 同步（请配置 iCloud entitlement 与容器 ID）"
         }
-        
-        return nil
     }
 }

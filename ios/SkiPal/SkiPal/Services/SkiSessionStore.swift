@@ -110,7 +110,9 @@ class SkiSessionStore: ObservableObject {
     
     /// 导出为GPX格式
     func exportSessionAsGPX(_ session: SkiSession) -> String {
-        var gpx = """<?xml version="1.0" encoding="UTF-8"?>
+        // XML 声明必须位于首字符位置，因此单独拼接，避免多行字符串带来的前导换行
+        var gpx = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        gpx += """
 <gpx version="1.1" creator="SkiPal" xmlns="http://www.topografix.com/GPX/1/1">
   <trk>
     <name>\(session.resortName ?? "滑雪记录")</name>

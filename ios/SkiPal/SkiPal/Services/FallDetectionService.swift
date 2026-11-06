@@ -10,8 +10,8 @@ import CoreMotion
 import Combine
 import UIKit
 
-/// 跌倒检测状态
-enum FallDetectionState {
+/// 跌倒警报状态
+enum FallAlertState {
     case monitoring
     case potentialFall(timestamp: Date, magnitude: Double)
     case confirmed
@@ -27,8 +27,8 @@ enum FallDetectionState {
     }
 }
 
-/// 跌倒事件
-struct FallEvent: Identifiable, Codable {
+/// 跌倒警报记录
+struct FallAlertRecord: Identifiable, Codable {
     let id: UUID
     let timestamp: Date
     let magnitude: Double
@@ -56,8 +56,8 @@ class FallDetectionService: NSObject, ObservableObject {
 
     // 发布属性
     @Published private(set) var isEnabled = true
-    @Published private(set) var state: FallDetectionState = .monitoring
-    @Published private(set) var recentFallEvents: [FallEvent] = []
+    @Published private(set) var state: FallAlertState = .monitoring
+    @Published private(set) var recentFallEvents: [FallAlertRecord] = []
     @Published private(set) var isMonitoring = false
 
     // 检测阈值
@@ -65,7 +65,7 @@ class FallDetectionService: NSObject, ObservableObject {
     @Published var impactDurationThreshold: Double = 0.3  // 持续时间阈值（秒）
 
     // 回调
-    let fallDetected = PassthroughSubject<FallEvent, Never>()
+    let fallDetected = PassthroughSubject<FallAlertRecord, Never>()
 
     // Motion Manager
     private let motionManager = CMMotionManager()
@@ -270,7 +270,7 @@ class FallDetectionService: NSObject, ObservableObject {
 
         // 创建跌倒事件
         let duration = fallStartTime.map { Date().timeIntervalSince($0) } ?? 0
-        let event = FallEvent(magnitude: magnitude, duration: duration, location: location)
+        let event = FallAlertRecord(magnitude: magnitude, duration: duration, location: location)
 
         // 更新状态
         state = .potentialFall(timestamp: Date(), magnitude: magnitude)
@@ -425,7 +425,7 @@ class FallDetectionService: NSObject, ObservableObject {
 
     private func loadFallHistory() {
         guard let data = UserDefaults.standard.data(forKey: "fallEvents"),
-              let events = try? JSONDecoder().decode([FallEvent].self, from: data) else {
+              let events = try? JSONDecoder().decode([FallAlertRecord].self, from: data) else {
             return
         }
         recentFallEvents = events
@@ -467,7 +467,7 @@ extension FallDetectionService {
 extension FallDetectionService {
     /// Watch 端触发跌倒（手动报告）
     func manualReportFall() {
-        let event = FallEvent(magnitude: 0, duration: 0)
+        let event = FallAlertRecord(magnitude: 0, duration: 0)
         recentFallEvents.insert(event, at: 0)
         saveFallHistory()
 

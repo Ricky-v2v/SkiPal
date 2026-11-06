@@ -3,217 +3,746 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		/* SkiPalApp.swift */
-		APP1 /* SkiPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = APP2; };
-		/* ContentView.swift */
-		CV1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CV2; };
-		/* Assets.xcassets */
-		ASSET1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ASSET2; };
+		02578EE0D343CE7743D38AF7 /* SkiResortDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570A0BF9C9636B8793264848 /* SkiResortDatabase.swift */; };
+		03FAE3295E5D945DB2EE4784 /* RecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15620448FA4C24D0671AB271 /* RecordingService.swift */; };
+		0BA6817A06F1BAFE5F7516FC /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC01A72EABC55855693B0AB0 /* WeatherService.swift */; };
+		124B3F48063A0A2C710721C5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8578FC927CCB60AD7A6A96 /* Localizable.strings */; };
+		12D2316B7C78F53C6E4204E0 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD7A8B410208307F8945126 /* LocationService.swift */; };
+		13B9591494D8E7564F523DD8 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEF57F4308D080714EF6182 /* InterfaceController.swift */; };
+		15B9A28CFEC22DC621BC593D /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C47766B2C3CC566CBDE0AB6 /* SessionDetailView.swift */; };
+		1C91AAD2596C4ACDF5FA4D13 /* ShareCardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E2B2F0D73438298F3CBD4F /* ShareCardService.swift */; };
+		2628B2AD9FDE8FA232DE36F1 /* SkiMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE7137E41D2D661D5ECA8D /* SkiMapView.swift */; };
+		2B79348C9A7EF24D13BCF51D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5B8BBE5B823119F720FE6A4 /* Assets.xcassets */; };
+		2E4C9E173B29D09E9A21BA6C /* SkiSessionStore+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21447324840266ECC8DF88AD /* SkiSessionStore+CloudKit.swift */; };
+		361A072ED6EED29D05236BFC /* ski_resorts.json in Resources */ = {isa = PBXBuildFile; fileRef = 98E3B1AFFFD48174184F2D08 /* ski_resorts.json */; };
+		47CC8A4788284811B72A0B2E /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901E0E552F5338B847C00D19 /* HistoryView.swift */; };
+		4C036D206BABEFDF4079DC50 /* SkiCoach.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59E460C941689E5FDF23DCF /* SkiCoach.swift */; };
+		514E674FBAAA5650E21D9941 /* SkiSessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A87A25B3A4878C166A50170 /* SkiSessionStore.swift */; };
+		5769E18185BF20065037D51B /* ShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9ED2F5F9CB3EB79A84A59A /* ShareCardView.swift */; };
+		577A86392BF86AF0E73EB848 /* WatchConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD003448E7E8F10DE685B9C8 /* WatchConnectivityService.swift */; };
+		5B3DEBB915719C39999F039A /* ShareCardGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0EA807F605D464514BA9B7 /* ShareCardGenerator.swift */; };
+		5F474970DF7E8E378675C158 /* SkiPalWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 644C85F3971678DCD81EE029 /* SkiPalWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		61C518FFD727CAE2481E29C0 /* AICoachService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD04B3BB8141BE8E935449 /* AICoachService.swift */; };
+		63348BEF593DCE0AF1DB9DDC /* SyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB454A6CBB156817392400 /* SyncStatusView.swift */; };
+		6B910B3870718BAD55B7F2B2 /* SkiCoachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7501207AB34ACEF3ABDE7E /* SkiCoachView.swift */; };
+		71E1D24F245F0F59D3E2CF4C /* RunScoreEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53366B0A7C7719FDFB5C327 /* RunScoreEngineTests.swift */; };
+		774C0DD73B01B3061BC77F04 /* RunScoreEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1C68A2B17F08139040709 /* RunScoreEngine.swift */; };
+		87F3AEAD1D3C9A65DA3BD54B /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32C0BE5989CA6ED94AEFC94 /* WeatherView.swift */; };
+		90195376963573DFC2A0DCBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7F021890720620079EDA62 /* LaunchScreen.storyboard */; };
+		944C27F6AC74F0D6C023412A /* SkiPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB33D8BD55AB331746A6C259 /* SkiPalApp.swift */; };
+		95D737AC006158CB9C86B5BB /* CloudKitSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D748EACD3A202DE156ADF4 /* CloudKitSyncService.swift */; };
+		977EAC21D37D34571BAFA6EE /* SkiResort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6BB23E112F13D98043AD6E /* SkiResort.swift */; };
+		9876923E10A2BA8EA4E17FA1 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C26C86B8225F6AF4841AC0 /* StatisticsView.swift */; };
+		9A74ED8E245272C44AC58E04 /* EmergencyContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68162E14CEC34A68653CFB0 /* EmergencyContact.swift */; };
+		A2C7DCB60E53048A5BDE1C48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BECD4A4703A9A5870FD515 /* ContentView.swift */; };
+		A52576C2A6687CA0127DA4B2 /* SkiSession+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D107B4F3E8D1BF354A52D5 /* SkiSession+CloudKit.swift */; };
+		A92884DDA2B149F7FCC09582 /* WatchAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41553BD0A2A5C2E48AFA9D2A /* WatchAppDelegate.swift */; };
+		AD7E9562073515B1A5BD2269 /* SkiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A5DFBE79C51637149E54C8 /* SkiSession.swift */; };
+		E122FD650F612DE8ADD6A91F /* AICoachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675938F632FA8FF7BF37AB0 /* AICoachView.swift */; };
+		E8E2508D298EB941C9AF807A /* FallDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0259F8128FD6680F40693E08 /* FallDetector.swift */; };
+		EF20148721B68875034B2501 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE57C8363FB210C8D936B7 /* HomeView.swift */; };
+		F2EC4747A6077FC93D240BDB /* VideoRecordingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743C48AF13722F36DF44109D /* VideoRecordingService.swift */; };
+		F4928F9A5D5E7257E92D4A1D /* FallDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A92C857F0429B77FD6F3A00 /* FallDetectionView.swift */; };
+		F89CADD0FE36F4C4EF0570CF /* BackgroundTasks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3567878579460D648E9FE9AC /* BackgroundTasks.plist */; };
+		FA11CAB40F1D0C52DB0499E5 /* SkiPalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5196751447954D62F1C225D /* SkiPalTests.swift */; };
+		FD5163AAC330E8A95FF06BB8 /* FallDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8188E8CBE29D34A3569F9DD /* FallDetectionService.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXFileReference section */
-		APP2 /* SkiPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiPalApp.swift; sourceTree = "<group>"; };
-		CV2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		ASSET2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-/* End PBXFileReference section */
+/* Begin PBXContainerItemProxy section */
+		2F02232AF947D6FBCE27F888 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 73DA924ACD1DE50DE7457831 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64638015645F81C28C120642;
+			remoteInfo = SkiPalWatch;
+		};
+		53C711384781C9D0350481BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 73DA924ACD1DE50DE7457831 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF2DDBA8EAC2A420E88D0455;
+			remoteInfo = SkiPal;
+		};
+/* End PBXContainerItemProxy section */
 
-/* Begin PBXFrameworksBuildPhase section */
-		FRAMEWORKS /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
+/* Begin PBXCopyFilesBuildPhase section */
+		A3C0AA6B8FCEB37E6015A2E7 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
 			files = (
+				5F474970DF7E8E378675C158 /* SkiPalWatch.app in Embed Watch Content */,
 			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXFrameworksBuildPhase section */
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0259F8128FD6680F40693E08 /* FallDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallDetector.swift; sourceTree = "<group>"; };
+		0A87A25B3A4878C166A50170 /* SkiSessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiSessionStore.swift; sourceTree = "<group>"; };
+		0A92C857F0429B77FD6F3A00 /* FallDetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallDetectionView.swift; sourceTree = "<group>"; };
+		15620448FA4C24D0671AB271 /* RecordingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingService.swift; sourceTree = "<group>"; };
+		16FE57C8363FB210C8D936B7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		1E88F4A082CE57CA018A26A8 /* SkiPalTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SkiPalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		21447324840266ECC8DF88AD /* SkiSessionStore+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkiSessionStore+CloudKit.swift"; sourceTree = "<group>"; };
+		24BECD4A4703A9A5870FD515 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		33B5A15929BB7001A40A2AFC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		3567878579460D648E9FE9AC /* BackgroundTasks.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = BackgroundTasks.plist; sourceTree = "<group>"; };
+		3C47766B2C3CC566CBDE0AB6 /* SessionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailView.swift; sourceTree = "<group>"; };
+		3DBB454A6CBB156817392400 /* SyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStatusView.swift; sourceTree = "<group>"; };
+		41553BD0A2A5C2E48AFA9D2A /* WatchAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppDelegate.swift; sourceTree = "<group>"; };
+		4A7501207AB34ACEF3ABDE7E /* SkiCoachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiCoachView.swift; sourceTree = "<group>"; };
+		4E9ED2F5F9CB3EB79A84A59A /* ShareCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardView.swift; sourceTree = "<group>"; };
+		570A0BF9C9636B8793264848 /* SkiResortDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiResortDatabase.swift; sourceTree = "<group>"; };
+		609DA637A81DF534ECBC3304 /* SkiPal.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SkiPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		644C85F3971678DCD81EE029 /* SkiPalWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkiPalWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		67D748EACD3A202DE156ADF4 /* CloudKitSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSyncService.swift; sourceTree = "<group>"; };
+		6E0EA807F605D464514BA9B7 /* ShareCardGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardGenerator.swift; sourceTree = "<group>"; };
+		6FC1C68A2B17F08139040709 /* RunScoreEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunScoreEngine.swift; sourceTree = "<group>"; };
+		743C48AF13722F36DF44109D /* VideoRecordingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecordingService.swift; sourceTree = "<group>"; };
+		7A6BB23E112F13D98043AD6E /* SkiResort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiResort.swift; sourceTree = "<group>"; };
+		84EE7137E41D2D661D5ECA8D /* SkiMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiMapView.swift; sourceTree = "<group>"; };
+		85DD04B3BB8141BE8E935449 /* AICoachService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AICoachService.swift; sourceTree = "<group>"; };
+		87327741EBB75DAE46E3A20E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8B9F98F9A214E115388A63DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		901E0E552F5338B847C00D19 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		90C26C86B8225F6AF4841AC0 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		98E3B1AFFFD48174184F2D08 /* ski_resorts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ski_resorts.json; sourceTree = "<group>"; };
+		A675938F632FA8FF7BF37AB0 /* AICoachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AICoachView.swift; sourceTree = "<group>"; };
+		AB7E726E4CEA65693B160FE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B8188E8CBE29D34A3569F9DD /* FallDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallDetectionService.swift; sourceTree = "<group>"; };
+		BFD7A8B410208307F8945126 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		C53366B0A7C7719FDFB5C327 /* RunScoreEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunScoreEngineTests.swift; sourceTree = "<group>"; };
+		C68162E14CEC34A68653CFB0 /* EmergencyContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyContact.swift; sourceTree = "<group>"; };
+		D2D107B4F3E8D1BF354A52D5 /* SkiSession+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkiSession+CloudKit.swift"; sourceTree = "<group>"; };
+		D32C0BE5989CA6ED94AEFC94 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		E1A5DFBE79C51637149E54C8 /* SkiSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiSession.swift; sourceTree = "<group>"; };
+		E32F4CC9B6C543E65F873D10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E5196751447954D62F1C225D /* SkiPalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiPalTests.swift; sourceTree = "<group>"; };
+		E8E2B2F0D73438298F3CBD4F /* ShareCardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardService.swift; sourceTree = "<group>"; };
+		EFEF57F4308D080714EF6182 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		F59E460C941689E5FDF23DCF /* SkiCoach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiCoach.swift; sourceTree = "<group>"; };
+		F5B8BBE5B823119F720FE6A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FB33D8BD55AB331746A6C259 /* SkiPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiPalApp.swift; sourceTree = "<group>"; };
+		FC01A72EABC55855693B0AB0 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		FD003448E7E8F10DE685B9C8 /* WatchConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		ROOT /* Root */ = {
+		0BE670F9D1BF35C6846A9078 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				SKIPAL /* SkiPal */,
-				PRODUCTS /* Products */,
+				4D8578FC927CCB60AD7A6A96 /* Localizable.strings */,
 			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
-		PRODUCTS /* Products */ = {
+		26DBCC06A9E661BD570F2A2A /* SkiPalTests */ = {
 			isa = PBXGroup;
 			children = (
-				APP /* SkiPal.app */,
+				C53366B0A7C7719FDFB5C327 /* RunScoreEngineTests.swift */,
+				E5196751447954D62F1C225D /* SkiPalTests.swift */,
+			);
+			path = SkiPalTests;
+			sourceTree = "<group>";
+		};
+		380B1B36A3BC5D8B041F324A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				98E3B1AFFFD48174184F2D08 /* ski_resorts.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		49342666F4DB8C9E6916A877 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				609DA637A81DF534ECBC3304 /* SkiPal.app */,
+				1E88F4A082CE57CA018A26A8 /* SkiPalTests.xctest */,
+				644C85F3971678DCD81EE029 /* SkiPalWatch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		SKIPAL /* SkiPal */ = {
+		4FA437240F7E61C515B952C4 /* SkiPal */ = {
 			isa = PBXGroup;
 			children = (
-				APP2 /* SkiPalApp.swift */,
-				CV2 /* ContentView.swift */,
-				ASSET2 /* Assets.xcassets */,
+				F5B8BBE5B823119F720FE6A4 /* Assets.xcassets */,
+				3567878579460D648E9FE9AC /* BackgroundTasks.plist */,
+				E32F4CC9B6C543E65F873D10 /* Info.plist */,
+				FB33D8BD55AB331746A6C259 /* SkiPalApp.swift */,
+				380B1B36A3BC5D8B041F324A /* Data */,
+				EC7F021890720620079EDA62 /* LaunchScreen.storyboard */,
+				DA246AB0816480FAF3E599B4 /* Models */,
+				0BE670F9D1BF35C6846A9078 /* Resources */,
+				F7EA7383330AE4CF6B3D9007 /* Services */,
+				B39F387A42B1833FD34CC660 /* Views */,
 			);
 			path = SkiPal;
+			sourceTree = "<group>";
+		};
+		509250CAD2BD0F8F8F2F7F7B /* WatchApp */ = {
+			isa = PBXGroup;
+			children = (
+				AB7E726E4CEA65693B160FE9 /* Info.plist */,
+				EFEF57F4308D080714EF6182 /* InterfaceController.swift */,
+				41553BD0A2A5C2E48AFA9D2A /* WatchAppDelegate.swift */,
+			);
+			name = WatchApp;
+			path = WatchApp/WatchApp;
+			sourceTree = "<group>";
+		};
+		B39F387A42B1833FD34CC660 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A675938F632FA8FF7BF37AB0 /* AICoachView.swift */,
+				24BECD4A4703A9A5870FD515 /* ContentView.swift */,
+				0A92C857F0429B77FD6F3A00 /* FallDetectionView.swift */,
+				901E0E552F5338B847C00D19 /* HistoryView.swift */,
+				16FE57C8363FB210C8D936B7 /* HomeView.swift */,
+				3C47766B2C3CC566CBDE0AB6 /* SessionDetailView.swift */,
+				4E9ED2F5F9CB3EB79A84A59A /* ShareCardView.swift */,
+				4A7501207AB34ACEF3ABDE7E /* SkiCoachView.swift */,
+				84EE7137E41D2D661D5ECA8D /* SkiMapView.swift */,
+				90C26C86B8225F6AF4841AC0 /* StatisticsView.swift */,
+				3DBB454A6CBB156817392400 /* SyncStatusView.swift */,
+				D32C0BE5989CA6ED94AEFC94 /* WeatherView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D5FBBB25D58E649E11E1FE07 = {
+			isa = PBXGroup;
+			children = (
+				4FA437240F7E61C515B952C4 /* SkiPal */,
+				26DBCC06A9E661BD570F2A2A /* SkiPalTests */,
+				509250CAD2BD0F8F8F2F7F7B /* WatchApp */,
+				49342666F4DB8C9E6916A877 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DA246AB0816480FAF3E599B4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C68162E14CEC34A68653CFB0 /* EmergencyContact.swift */,
+				7A6BB23E112F13D98043AD6E /* SkiResort.swift */,
+				E1A5DFBE79C51637149E54C8 /* SkiSession.swift */,
+				D2D107B4F3E8D1BF354A52D5 /* SkiSession+CloudKit.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F7EA7383330AE4CF6B3D9007 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				85DD04B3BB8141BE8E935449 /* AICoachService.swift */,
+				67D748EACD3A202DE156ADF4 /* CloudKitSyncService.swift */,
+				B8188E8CBE29D34A3569F9DD /* FallDetectionService.swift */,
+				0259F8128FD6680F40693E08 /* FallDetector.swift */,
+				BFD7A8B410208307F8945126 /* LocationService.swift */,
+				15620448FA4C24D0671AB271 /* RecordingService.swift */,
+				6FC1C68A2B17F08139040709 /* RunScoreEngine.swift */,
+				6E0EA807F605D464514BA9B7 /* ShareCardGenerator.swift */,
+				E8E2B2F0D73438298F3CBD4F /* ShareCardService.swift */,
+				F59E460C941689E5FDF23DCF /* SkiCoach.swift */,
+				570A0BF9C9636B8793264848 /* SkiResortDatabase.swift */,
+				0A87A25B3A4878C166A50170 /* SkiSessionStore.swift */,
+				21447324840266ECC8DF88AD /* SkiSessionStore+CloudKit.swift */,
+				743C48AF13722F36DF44109D /* VideoRecordingService.swift */,
+				FD003448E7E8F10DE685B9C8 /* WatchConnectivityService.swift */,
+				FC01A72EABC55855693B0AB0 /* WeatherService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		TARGET /* SkiPal */ = {
+		64638015645F81C28C120642 /* SkiPalWatch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BUILDLIST /* Build configuration list for PBXNativeTarget "SkiPal" */;
+			buildConfigurationList = 1ACAD2C52023F184FEF0F45F /* Build configuration list for PBXNativeTarget "SkiPalWatch" */;
 			buildPhases = (
-				SOURCES /* Sources */,
-				FRAMEWORKS /* Frameworks */,
-				RESOURCES /* Resources */,
+				A421552CE31E188BE80C98DB /* Sources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			name = SkiPalWatch;
+			packageProductDependencies = (
+			);
+			productName = SkiPalWatch;
+			productReference = 644C85F3971678DCD81EE029 /* SkiPalWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		767952E1B851D158F5FB18A4 /* SkiPalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9EBBB328A9A57980E08153D3 /* Build configuration list for PBXNativeTarget "SkiPalTests" */;
+			buildPhases = (
+				860FD099957DF45AA11C13F5 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18BFE03CD58F2BC9696A60F7 /* PBXTargetDependency */,
+			);
+			name = SkiPalTests;
+			packageProductDependencies = (
+			);
+			productName = SkiPalTests;
+			productReference = 1E88F4A082CE57CA018A26A8 /* SkiPalTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FF2DDBA8EAC2A420E88D0455 /* SkiPal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66092982D17A8C2B1151AA0B /* Build configuration list for PBXNativeTarget "SkiPal" */;
+			buildPhases = (
+				A7421831ABBBE30E9C6C935D /* Sources */,
+				17192086E00B6C4E5FAD76E1 /* Resources */,
+				A3C0AA6B8FCEB37E6015A2E7 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5AB12534DAB41A20428460DD /* PBXTargetDependency */,
+			);
 			name = SkiPal;
+			packageProductDependencies = (
+			);
 			productName = SkiPal;
-			productReference = APP /* SkiPal.app */;
+			productReference = 609DA637A81DF534ECBC3304 /* SkiPal.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		PROJECT /* Project object */ = {
+		73DA924ACD1DE50DE7457831 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					TARGET = {
-						CreatedOnToolsVersion = 15.0;
+					64638015645F81C28C120642 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					767952E1B851D158F5FB18A4 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					FF2DDBA8EAC2A420E88D0455 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = PROJBUILD /* Build configuration list for PBXProject "SkiPal" */;
-			compatibilityVersion = "Xcode 14.0";
+			buildConfigurationList = 840655135550D4D5FBFBB8E1 /* Build configuration list for PBXProject "SkiPal" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
+				"zh-Hans",
 			);
-			mainGroup = ROOT /* Root */;
-			productRefGroup = PRODUCTS /* Products */;
+			mainGroup = D5FBBB25D58E649E11E1FE07;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 49342666F4DB8C9E6916A877 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				TARGET /* SkiPal */,
+				FF2DDBA8EAC2A420E88D0455 /* SkiPal */,
+				64638015645F81C28C120642 /* SkiPalWatch */,
+				767952E1B851D158F5FB18A4 /* SkiPalTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		RESOURCES /* Resources */ = {
+		17192086E00B6C4E5FAD76E1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ASSET1 /* Assets.xcassets in Resources */,
+				2B79348C9A7EF24D13BCF51D /* Assets.xcassets in Resources */,
+				F89CADD0FE36F4C4EF0570CF /* BackgroundTasks.plist in Resources */,
+				90195376963573DFC2A0DCBA /* LaunchScreen.storyboard in Resources */,
+				124B3F48063A0A2C710721C5 /* Localizable.strings in Resources */,
+				361A072ED6EED29D05236BFC /* ski_resorts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		SOURCES /* Sources */ = {
+		860FD099957DF45AA11C13F5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				APP1 /* SkiPalApp.swift in Sources */,
-				CV1 /* ContentView.swift in Sources */,
+				71E1D24F245F0F59D3E2CF4C /* RunScoreEngineTests.swift in Sources */,
+				FA11CAB40F1D0C52DB0499E5 /* SkiPalTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A421552CE31E188BE80C98DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B9591494D8E7564F523DD8 /* InterfaceController.swift in Sources */,
+				A92884DDA2B149F7FCC09582 /* WatchAppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7421831ABBBE30E9C6C935D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61C518FFD727CAE2481E29C0 /* AICoachService.swift in Sources */,
+				E122FD650F612DE8ADD6A91F /* AICoachView.swift in Sources */,
+				95D737AC006158CB9C86B5BB /* CloudKitSyncService.swift in Sources */,
+				A2C7DCB60E53048A5BDE1C48 /* ContentView.swift in Sources */,
+				9A74ED8E245272C44AC58E04 /* EmergencyContact.swift in Sources */,
+				FD5163AAC330E8A95FF06BB8 /* FallDetectionService.swift in Sources */,
+				F4928F9A5D5E7257E92D4A1D /* FallDetectionView.swift in Sources */,
+				E8E2508D298EB941C9AF807A /* FallDetector.swift in Sources */,
+				47CC8A4788284811B72A0B2E /* HistoryView.swift in Sources */,
+				EF20148721B68875034B2501 /* HomeView.swift in Sources */,
+				12D2316B7C78F53C6E4204E0 /* LocationService.swift in Sources */,
+				03FAE3295E5D945DB2EE4784 /* RecordingService.swift in Sources */,
+				774C0DD73B01B3061BC77F04 /* RunScoreEngine.swift in Sources */,
+				15B9A28CFEC22DC621BC593D /* SessionDetailView.swift in Sources */,
+				5B3DEBB915719C39999F039A /* ShareCardGenerator.swift in Sources */,
+				1C91AAD2596C4ACDF5FA4D13 /* ShareCardService.swift in Sources */,
+				5769E18185BF20065037D51B /* ShareCardView.swift in Sources */,
+				4C036D206BABEFDF4079DC50 /* SkiCoach.swift in Sources */,
+				6B910B3870718BAD55B7F2B2 /* SkiCoachView.swift in Sources */,
+				2628B2AD9FDE8FA232DE36F1 /* SkiMapView.swift in Sources */,
+				944C27F6AC74F0D6C023412A /* SkiPalApp.swift in Sources */,
+				977EAC21D37D34571BAFA6EE /* SkiResort.swift in Sources */,
+				02578EE0D343CE7743D38AF7 /* SkiResortDatabase.swift in Sources */,
+				A52576C2A6687CA0127DA4B2 /* SkiSession+CloudKit.swift in Sources */,
+				AD7E9562073515B1A5BD2269 /* SkiSession.swift in Sources */,
+				2E4C9E173B29D09E9A21BA6C /* SkiSessionStore+CloudKit.swift in Sources */,
+				514E674FBAAA5650E21D9941 /* SkiSessionStore.swift in Sources */,
+				9876923E10A2BA8EA4E17FA1 /* StatisticsView.swift in Sources */,
+				63348BEF593DCE0AF1DB9DDC /* SyncStatusView.swift in Sources */,
+				F2EC4747A6077FC93D240BDB /* VideoRecordingService.swift in Sources */,
+				577A86392BF86AF0E73EB848 /* WatchConnectivityService.swift in Sources */,
+				0BA6817A06F1BAFE5F7516FC /* WeatherService.swift in Sources */,
+				87F3AEAD1D3C9A65DA3BD54B /* WeatherView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		18BFE03CD58F2BC9696A60F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF2DDBA8EAC2A420E88D0455 /* SkiPal */;
+			targetProxy = 53C711384781C9D0350481BF /* PBXContainerItemProxy */;
+		};
+		5AB12534DAB41A20428460DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 64638015645F81C28C120642 /* SkiPalWatch */;
+			targetProxy = 2F02232AF947D6FBCE27F888 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4D8578FC927CCB60AD7A6A96 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B9F98F9A214E115388A63DC /* en */,
+				33B5A15929BB7001A40A2AFC /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		EC7F021890720620079EDA62 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				87327741EBB75DAE46E3A20E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
-		DEBUG /* Debug */ = {
+		1F3A0FC0E5F700A21F769802 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = WatchApp/WatchApp/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skipal.app.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		50493F04EF7B5E6B40DB0E40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.skipal.app.tests;
+				PRODUCT_MODULE_NAME = SkiPalTests;
+				PRODUCT_NAME = SkiPalTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkiPal.app/SkiPal";
+			};
+			name = Debug;
+		};
+		609EB428FEB3C0A7036575C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = SkiPal;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_FILE = SkiPal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.skipal.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		RELEASE /* Release */ = {
+		B52973C214C3D33C282BBD03 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skipal.app;
+				PRODUCT_NAME = SkiPal;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		C377CD5BCBE1735AF3419016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = WatchApp/WatchApp/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skipal.app.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		ED01E3A78FFFDEC47D7C31E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = SkiPal;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_FILE = SkiPal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.skipal.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F8E44706F0FE45C3A2AA7DDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skipal.app;
+				PRODUCT_NAME = SkiPal;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		F98B642A4C4FA307FFC36280 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.skipal.app.tests;
+				PRODUCT_MODULE_NAME = SkiPalTests;
+				PRODUCT_NAME = SkiPalTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SkiPal.app/SkiPal";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		PROJBUILD /* Build configuration list for PBXProject "SkiPal" */ = {
+		1ACAD2C52023F184FEF0F45F /* Build configuration list for PBXNativeTarget "SkiPalWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DEBUG /* Debug */,
-				RELEASE /* Release */,
+				1F3A0FC0E5F700A21F769802 /* Debug */,
+				C377CD5BCBE1735AF3419016 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationIsName = Debug;
+			defaultConfigurationName = Debug;
 		};
-		BUILDLIST /* Build configuration list for PBXNativeTarget "SkiPal" */ = {
+		66092982D17A8C2B1151AA0B /* Build configuration list for PBXNativeTarget "SkiPal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DEBUG /* Debug */,
-				RELEASE /* Release */,
+				609EB428FEB3C0A7036575C7 /* Debug */,
+				ED01E3A78FFFDEC47D7C31E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationIsName = Debug;
+			defaultConfigurationName = Debug;
+		};
+		840655135550D4D5FBFBB8E1 /* Build configuration list for PBXProject "SkiPal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8E44706F0FE45C3A2AA7DDD /* Debug */,
+				B52973C214C3D33C282BBD03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9EBBB328A9A57980E08153D3 /* Build configuration list for PBXNativeTarget "SkiPalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50493F04EF7B5E6B40DB0E40 /* Debug */,
+				F98B642A4C4FA307FFC36280 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
-
 	};
-	rootObject = PROJECT /* Project object */;
+	rootObject = 73DA924ACD1DE50DE7457831 /* Project object */;
 }

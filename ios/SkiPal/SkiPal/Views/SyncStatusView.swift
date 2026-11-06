@@ -188,8 +188,9 @@ struct SyncDetailsView: View {
             // 触发同步
             await syncService.fetchAllSessionsFromCloud()
             // Haptic feedback
-            let impact = UIImpactFeedbackGenerator(style: .success)
-            impact.impactOccurred()            isSyncing = false
+            let notification = UINotificationFeedbackGenerator()
+            notification.notificationOccurred(.success)
+            isSyncing = false
         }
     }
     

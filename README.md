@@ -32,7 +32,7 @@ SkiPal 是一款面向滑雪爱好者的 iOS / watchOS 应用：记录每一次�
 
 - SwiftUI、Swift Charts、MapKit、Core Location、Core Motion、CloudKit、WatchConnectivity、AVFoundation
 - Swift 5.9 · iOS 17+ · watchOS 10+
-- XcodeGen 生成工程，GitHub Actions 做构建校验，Swift Testing 单元测试
+- XcodeGen 生成工程，GitHub Actions 做构建校验，XCTest 单元测试
 
 ## 目录结构
 
@@ -48,10 +48,22 @@ SkiPal/
 │   ├── WatchApp/          # watchOS App
 │   ├── SkiPalTests/       # 单元测试
 │   └── project.yml        # XcodeGen 工程定义
+├── docs/                  # 需求、进度、想法池、技术方案、历史归档
+├── AGENTS.md              # 协作与 AI 编码工具的统一规则
 ├── QUICKSTART.md          # 本地运行与 CloudKit 配置
-├── IMPLEMENTATION_CHECKLIST.md
 └── LICENSE
 ```
+
+## 文档导航
+
+| 文档 | 用途 |
+| --- | --- |
+| [AGENTS.md](AGENTS.md) | 开发规则、文档规范、行数约束 |
+| [docs/progress.md](docs/progress.md) | 当前进度与交付状态 |
+| [docs/PRD.md](docs/PRD.md) | 产品需求与变更台账 |
+| [docs/roadmap.md](docs/roadmap.md) | 想法池与后续工作 |
+| [docs/architecture.md](docs/architecture.md) | 技术方案、构建与测试 |
+| [docs/history/](docs/history/README.md) | 第二阶段历史文档 |
 
 ## 构建与运行
 

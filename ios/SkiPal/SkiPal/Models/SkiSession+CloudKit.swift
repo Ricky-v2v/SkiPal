@@ -19,14 +19,14 @@ extension SkiSession {
         encoder.dateEncodingStrategy = .iso8601
         
         if let data = try? encoder.encode(self) {
-            record["sessionData"] = CKRecord.Value(CKAsset(data: data))
+            record["sessionData"] = makeSessionDataAsset(from: data)
         }
         
-        record["sessionID"] = CKRecord.Value(CKAsset(string: id.uuidString))
-        record["startTime"] = CKRecord.Value(CKAsset(date: startTime))
-        record["endTime"] = CKRecord.Value(CKAsset(date: endTime ?? Date()))
-        record["resortName"] = CKRecord.Value(CKAsset(string: resortName ?? ""))
-        record["modifiedDate"] = CKRecord.Value(CKAsset(date: Date()))
+        record["sessionID"] = id.uuidString
+        record["startTime"] = startTime
+        record["endTime"] = endTime ?? Date()
+        record["resortName"] = resortName ?? ""
+        record["modifiedDate"] = Date()
         
         return record
     }
@@ -41,37 +41,35 @@ extension SkiSession {
         decoder.dateDecodingStrategy = .iso8601
         
         do {
-            switch sessionData {
-            case let .asset(asset):
-                if let data = asset.data {
-                    return try decoder.decode(SkiSession.self, from: data)
-                }
-            default:
-                break
+            if let asset = sessionData as? CKAsset, let fileURL = asset.fileURL {
+                let data = try Data(contentsOf: fileURL)
+                return try decoder.decode(SkiSession.self, from: data)
+            }
+
+            // 兼容旧版本直接把 JSON Data 写入该字段的记录。
+            if let data = sessionData as? Data {
+                return try decoder.decode(SkiSession.self, from: data)
             }
         } catch {
             print("❌ 从 CloudKit 记录解码失败：\(error.localizedDescription)")
         }
-        
+
         return nil
     }
 }
 
-// MARK: - CKRecordValue 扩展
-extension CKRecordValue {
-    convenience init(_ asset: CKAsset) {
-        self.init(asset)
-    }
-}
+private extension SkiSession {
+    /// CKAsset 只接受文件 URL，临时文件需在 CloudKit 保存完成前保留。
+    func makeSessionDataAsset(from data: Data) -> CKAsset? {
+        let fileName = "SkiPal-\(id.uuidString)-\(UUID().uuidString).json"
+        let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
 
-extension CKAsset {
-    convenience init(string: String) {
-        self.init(data: string.data(using: .utf8))
-    }
-    
-    convenience init(date: Date) {
-        let formatter = ISO8601DateFormatter()
-        let string = formatter.string(from: date)
-        self.init(string: string)
+        do {
+            try data.write(to: fileURL, options: .atomic)
+            return CKAsset(fileURL: fileURL)
+        } catch {
+            print("❌ 创建 CloudKit 资产文件失败：\(error.localizedDescription)")
+            return nil
+        }
     }
 }

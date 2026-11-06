@@ -77,9 +77,9 @@ struct StartView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 
-                Text(locationService.canUseLocation 
+                Text(LocalizedStringKey(locationService.canUseLocation
                      ? "点击开始记录你的滑雪轨迹"
-                     : "请授权定位权限以开始记录")
+                     : "请授权定位权限以开始记录"))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -137,7 +137,7 @@ struct RecordingView: View {
                     .fill(recordingService.isRecording ? .green : .orange)
                     .frame(width: 10, height: 10)
                 
-                Text(recordingService.isRecording ? "记录中..." : "已暂停")
+                Text(LocalizedStringKey(recordingService.isRecording ? "记录中..." : "已暂停"))
                     .font(.headline)
                     .foregroundStyle(recordingService.isRecording ? .green : .orange)
                 
@@ -263,7 +263,7 @@ struct LocationStatusCard: View {
                     Image(systemName: locationService.hasLocation ? "location.fill" : "location.slash")
                         .foregroundStyle(locationService.hasLocation ? .green : .orange)
                     
-                    Text(locationService.hasLocation ? "GPS 已就绪" : "等待定位...")
+                    Text(LocalizedStringKey(locationService.hasLocation ? "GPS 已就绪" : "等待定位..."))
                         .font(.subheadline)
                         .fontWeight(.medium)
                 }
@@ -330,7 +330,7 @@ struct SessionRow: View {
             }
             
             if let resort = session.resortName {
-                Text(resort)
+                Text(LocalizedStringKey(resort))
                     .font(.caption)
                     .foregroundStyle(.blue)
             }
@@ -393,7 +393,7 @@ struct StatCard: View {
                     .foregroundStyle(.secondary)
             }
             
-            Text(label)
+            Text(LocalizedStringKey(label))
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -417,7 +417,7 @@ struct ControlButton: View {
                 Image(systemName: icon)
                     .font(.system(size: 28))
                 
-                Text(label)
+                Text(LocalizedStringKey(label))
                     .font(.caption)
                     .fontWeight(.semibold)
             }

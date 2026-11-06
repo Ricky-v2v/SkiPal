@@ -25,7 +25,7 @@ struct AICoachView: View {
                     VStack(spacing: 20) {
                         // 总体评分卡片
                         if let analysis = coachService.currentAnalysis {
-                            OverallScoreCard(analysis: analysis)
+                            AICoachOverallScoreCard(analysis: analysis)
                         } else {
                             EmptyStateCard()
                         }
@@ -71,7 +71,7 @@ struct AICoachView: View {
 }
 
 // MARK: - 总体评分卡片
-struct OverallScoreCard: View {
+struct AICoachOverallScoreCard: View {
     let analysis: CoachAnalysis
 
     var body: some View {
@@ -103,7 +103,7 @@ struct OverallScoreCard: View {
                         .font(.system(size: 48, weight: .bold, design: .rounded))
                         .foregroundStyle(.primary)
 
-                    Text(analysis.scoreLevel)
+                    Text(LocalizedStringKey(analysis.scoreLevel))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -130,7 +130,7 @@ struct ScoreBadge: View {
 
     var body: some View {
         VStack(spacing: 4) {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
 
@@ -186,7 +186,7 @@ struct RecentSessionsSection: View {
                                 .fontWeight(.medium)
 
                             if let resort = session.resortName {
-                                Text(resort)
+                                Text(LocalizedStringKey(resort))
                                     .font(.caption)
                                     .foregroundStyle(.blue)
                             }
@@ -227,7 +227,7 @@ struct AnalysisDetailView: View {
             TechniqueAnalysisView(analysis: analysis.techniqueAnalysis)
 
             // 改进建议
-            SuggestionsView(suggestions: analysis.improvementSuggestions)
+            AICoachSuggestionsView(suggestions: analysis.improvementSuggestions)
 
             // 历史对比
             if let comparison = analysis.comparisonWithHistory {
@@ -300,7 +300,7 @@ struct SpeedAnalysisView: View {
                 }
             }
 
-            Label(analysis.speedTrend.rawValue, systemImage: "chart.line.uptrend.xyaxis")
+            Label(LocalizedStringKey(analysis.speedTrend.rawValue), systemImage: "chart.line.uptrend.xyaxis")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -322,7 +322,7 @@ struct SpeedDistributionBar: View {
                 .fill(color)
                 .frame(height: CGFloat(value) * 0.8)
 
-            Text(label)
+            Text(LocalizedStringKey(label))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
 
@@ -397,7 +397,7 @@ struct TechniqueAnalysisView: View {
                 }
             }
 
-            Label("舒适度: \(analysis.slopeHandling.comfortLevel.rawValue)", systemImage: "hand.thumbsup")
+            Label("舒适度: \(Text(LocalizedStringKey(analysis.slopeHandling.comfortLevel.rawValue)))", systemImage: "hand.thumbsup")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -431,7 +431,7 @@ struct MetricRing: View {
                     .fontWeight(.bold)
             }
 
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         }
@@ -455,7 +455,7 @@ struct SlopeLevelBar: View {
                 .fill(color)
                 .frame(width: 30, height: CGFloat(value) * 0.5)
 
-            Text(level)
+            Text(LocalizedStringKey(level))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         }
@@ -463,7 +463,7 @@ struct SlopeLevelBar: View {
 }
 
 // MARK: - 建议视图
-struct SuggestionsView: View {
+struct AICoachSuggestionsView: View {
     let suggestions: [ImprovementSuggestion]
 
     var body: some View {
@@ -476,7 +476,7 @@ struct SuggestionsView: View {
             }
 
             ForEach(suggestions.prefix(5)) { suggestion in
-                SuggestionCard(suggestion: suggestion)
+                AICoachSuggestionCard(suggestion: suggestion)
             }
         }
         .padding()
@@ -486,13 +486,13 @@ struct SuggestionsView: View {
 }
 
 // MARK: - 建议卡片
-struct SuggestionCard: View {
+struct AICoachSuggestionCard: View {
     let suggestion: ImprovementSuggestion
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text(suggestion.title)
+                Text(LocalizedStringKey(suggestion.title))
                     .font(.subheadline)
                     .fontWeight(.semibold)
 
@@ -501,14 +501,14 @@ struct SuggestionCard: View {
                 PriorityBadge(priority: suggestion.priority)
             }
 
-            Text(suggestion.description)
+            Text(LocalizedStringKey(suggestion.description))
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
             HStack {
                 Image(systemName: "arrow.right.circle.fill")
                     .foregroundStyle(.blue)
-                Text(suggestion.actionableTip)
+                Text(LocalizedStringKey(suggestion.actionableTip))
                     .font(.caption)
                     .foregroundStyle(.blue)
             }
@@ -525,7 +525,7 @@ struct PriorityBadge: View {
     let priority: ImprovementSuggestion.Priority
 
     var body: some View {
-        Text(priority.rawValue)
+        Text(LocalizedStringKey(priority.rawValue))
             .font(.caption2)
             .fontWeight(.medium)
             .padding(.horizontal, 8)
@@ -588,7 +588,7 @@ struct HistoryComparisonView: View {
                 }
             }
 
-            Label("技术趋势: \(comparison.techniqueTrend.rawValue)", systemImage: "chart.line.uptrend.xyaxis")
+            Label("技术趋势: \(Text(LocalizedStringKey(comparison.techniqueTrend.rawValue)))", systemImage: "chart.line.uptrend.xyaxis")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -606,7 +606,7 @@ struct ComparisonMetric: View {
 
     var body: some View {
         VStack(spacing: 4) {
-            Text(title)
+            Text(LocalizedStringKey(title))
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
@@ -644,13 +644,13 @@ struct SessionAnalysisSheet: View {
                     .padding(.top, 100)
                 } else if let analysis = coachService.currentAnalysis {
                     VStack(spacing: 20) {
-                        OverallScoreCard(analysis: analysis)
+                        AICoachOverallScoreCard(analysis: analysis)
                         AnalysisDetailView(analysis: analysis)
                     }
                     .padding()
                 }
             }
-            .navigationTitle(session.startTime, style: .date)
+            .navigationTitle(Text(session.startTime, style: .date))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

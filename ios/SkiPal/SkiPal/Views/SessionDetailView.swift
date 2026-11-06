@@ -27,7 +27,7 @@ struct SessionDetailView: View {
                     
                     // 轨迹预览
                     if !session.locations.isEmpty {
-                        TrajectoryPreview(locations: session.locations)
+                        SessionTrajectoryPreview(locations: session.locations)
                             .padding(.horizontal)
                     }
                     
@@ -86,7 +86,7 @@ struct AchievementSection: View {
                 }
             }
             
-            Text(session.achievementTitle)
+            Text(LocalizedStringKey(session.achievementTitle))
                 .font(.headline)
                 .foregroundStyle(.orange)
         }
@@ -168,7 +168,7 @@ struct LargeStatCard: View {
                 }
             }
             
-            Text(label)
+            Text(LocalizedStringKey(label))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }
@@ -187,7 +187,7 @@ struct StatRow: View {
     
     var body: some View {
         HStack {
-            Label(label, systemImage: icon)
+            Label(LocalizedStringKey(label), systemImage: icon)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
             
@@ -253,7 +253,7 @@ struct DeleteButton: View {
 }
 
 // MARK: - 轨迹预览
-struct TrajectoryPreview: View {
+struct SessionTrajectoryPreview: View {
     let locations: [SkiLocation]
     
     var body: some View {

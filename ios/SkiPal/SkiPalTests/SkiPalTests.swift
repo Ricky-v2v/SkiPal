@@ -6,16 +6,39 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import SkiPal
 
 final class SkiPalTests: XCTestCase {
+
+    // SkiLocation 只提供从 CLLocation 转换的初始化方法。
+    private func makeSkiLocation(
+        latitude: Double,
+        longitude: Double,
+        altitude: Double,
+        speed: Double,
+        course: Double,
+        timestamp: Date = Date()
+    ) -> SkiLocation {
+        let location = CLLocation(
+            coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+            altitude: altitude,
+            horizontalAccuracy: 5,
+            verticalAccuracy: 5,
+            course: course,
+            speed: speed,
+            timestamp: timestamp
+        )
+        return SkiLocation(from: location)
+    }
     
     // MARK: - SkiSession 测试
     
     func testSkiSessionInitialization() {
-        let session = SkiSession()
+        let expectedID = UUID()
+        let session = SkiSession(id: expectedID)
         
-        XCTAssertEqual(session.id, UUID())
+        XCTAssertEqual(session.id, expectedID)
         XCTAssertEqual(session.locations.count, 0)
         XCTAssertEqual(session.duration, 0, accuracy: 1.0)
         XCTAssertEqual(session.totalDistance, 0)
@@ -23,7 +46,7 @@ final class SkiPalTests: XCTestCase {
     }
     
     func testSkiSessionWithLocations() {
-        let location1 = SkiLocation(
+        let location1 = makeSkiLocation(
             latitude: 40.3089,
             longitude: 116.6231,
             altitude: 450,
@@ -31,7 +54,7 @@ final class SkiPalTests: XCTestCase {
             course: 0
         )
         
-        let location2 = SkiLocation(
+        let location2 = makeSkiLocation(
             latitude: 40.3099,
             longitude: 116.6241,
             altitude: 440,
@@ -47,8 +70,8 @@ final class SkiPalTests: XCTestCase {
     }
     
     func testAchievementStars() {
-        let session = SkiSession()
-        session.locations = Array(repeating: SkiLocation(
+        var session = SkiSession()
+        session.locations = Array(repeating: makeSkiLocation(
             latitude: 40.0,
             longitude: 116.0,
             altitude: 500,
@@ -114,9 +137,9 @@ final class SkiPalTests: XCTestCase {
     
     func testPerformanceExample() throws {
         self.measure {
-            let session = SkiSession()
+            var session = SkiSession()
             session.locations = (0..<1000).map { _ in
-                SkiLocation(
+                self.makeSkiLocation(
                     latitude: 40.0 + Double.random(in: 0..<0.1),
                     longitude: 116.0 + Double.random(in: 0..<0.1),
                     altitude: 500 + Double.random(in: 0..<100),

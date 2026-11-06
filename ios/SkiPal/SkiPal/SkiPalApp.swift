@@ -36,11 +36,6 @@ struct SkiPalApp: App {
         videoRecordingService.locationService = locService
         aiCoachService.sessionStore = skiSessionStore
 
-        // 预加载雪场数据
-        Task {
-            await resortDatabase.loadResorts()
-        }
-
         // 请求通知权限（跌倒检测需要）
         fallDetectionService.requestNotificationPermission()
     }
@@ -60,6 +55,10 @@ struct SkiPalApp: App {
                 .environmentObject(aiCoachService)
                 .environmentObject(shareCardService)
                 .preferredColorScheme(.dark)  // 强制深色模式
+                // 预加载雪场数据：放在 .task 中，避免在 init 里用闭包捕获 self
+                .task {
+                    await resortDatabase.loadResorts()
+                }
         }
     }
 }

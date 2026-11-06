@@ -57,6 +57,15 @@ struct SkiResort: Identifiable, Codable, Hashable {
         totalRuns > 50
     }
 
+    /// 按当前语言环境返回雪场名称（英文界面优先使用 nameEn）
+    var localizedName: String {
+        let preferred = Locale.preferredLanguages.first?.lowercased() ?? ""
+        if preferred.hasPrefix("en"), let nameEn, !nameEn.isEmpty {
+            return nameEn
+        }
+        return name
+    }
+
     /// 等级分布百分比描述
     var difficultyDescription: String {
         let total = difficultyDistribution.total

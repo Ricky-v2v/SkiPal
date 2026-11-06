@@ -186,6 +186,6 @@ struct SkiWeather {
 
 ---
 
-**Questions?** Check `PHASE2_IMPLEMENTATION.md` for detailed docs.
+**Questions?** Check [docs/history/PHASE2_IMPLEMENTATION.md](docs/history/PHASE2_IMPLEMENTATION.md) for detailed docs.
 
 Happy skiing! 🎿

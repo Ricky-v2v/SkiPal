@@ -375,7 +375,7 @@ class AICoachService: ObservableObject {
         let turns = estimateTurns(locations: locations)
 
         // 坡度处理分析
-        let slopeHandling = analyzeSlopeHandling(session: session)
+        let slopeHandling = analyzeSlopeHandling(session)
 
         // 控制力评分
         let controlScore = calculateControlScore(smoothness: smoothness, turns: turns)
@@ -505,7 +505,7 @@ class AICoachService: ObservableObject {
         return TechniqueAnalysis.TurnAnalysis(
             estimatedTurns: turns.count,
             averageTurnInterval: avgInterval,
-            turnSmoothness: min(100, max(0, 100 - turns.count))
+            turnSmoothness: Double(max(0, 100 - turns.count))
         )
     }
 

@@ -12,8 +12,9 @@ import UIKit
 import AudioToolbox
 
 /// 摔倒检测结果
-struct FallEvent: Identifiable {
-    let id = UUID()
+struct FallEvent: Identifiable, Equatable {
+    /// 用 var 以便 Codable 解码时还原持久化的 id
+    var id = UUID()
     let timestamp: Date
     let impactMagnitude: Double
     let location: FallLocation?
@@ -22,14 +23,14 @@ struct FallEvent: Identifiable {
 }
 
 /// 摔倒位置（如果可用）
-struct FallLocation: Codable {
+struct FallLocation: Codable, Equatable {
     let latitude: Double
     let longitude: Double
     let altitude: Double
 }
 
 /// 用户响应类型
-enum FallResponse {
+enum FallResponse: Equatable {
     case imOkay      // 用户确认没事
     case needHelp    // 用户需要帮助
     case noResponse  // 用户无响应
@@ -66,6 +67,16 @@ class FallDetector: ObservableObject {
     @Published var isEnabled: Bool = true
     @Published var sensitivity: FallSensitivity = .normal
     @Published var fallHistory: [FallEvent] = []
+
+    /// 当前待处理的摔倒事件（已检测到摔倒，或警报已触发）
+    private var pendingFallEvent: FallEvent? {
+        switch state {
+        case .fallDetected(let event), .alarmTriggered(let event):
+            return event
+        case .idle, .monitoring, .potentialFall:
+            return nil
+        }
+    }
 
     // MARK: - Configuration
 
@@ -162,8 +173,7 @@ class FallDetector: ObservableObject {
 
     /// 用户确认没事
     func confirmOkay() {
-        guard case .fallDetected(let event) = state ||
-              case .alarmTriggered(let event) = state else { return }
+        guard let event = pendingFallEvent else { return }
 
         var updatedEvent = event
         updatedEvent.confirmed = true
@@ -177,8 +187,7 @@ class FallDetector: ObservableObject {
 
     /// 用户请求帮助
     func requestHelp() {
-        guard case .fallDetected(let event) = state ||
-              case .alarmTriggered(let event) = state else { return }
+        guard let event = pendingFallEvent else { return }
 
         var updatedEvent = event
         updatedEvent.confirmed = true

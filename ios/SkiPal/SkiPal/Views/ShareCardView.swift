@@ -148,7 +148,7 @@ struct ShareCardView: View {
     }
     
     private func shareCard() {
-        guard let image = generatedImage else { return }
+        guard generatedImage != nil else { return }
         showingShareSheet = true
     }
     
@@ -174,7 +174,7 @@ struct TemplateButton: View {
         Button(action: action) {
             VStack(spacing: 8) {
                 Circle()
-                    .fill(template.primaryColor)
+                    .fill(Color(template.primaryColor))
                     .frame(width: 50, height: 50)
                     .overlay(
                         Circle()
@@ -182,11 +182,11 @@ struct TemplateButton: View {
                     )
                     .overlay(
                         Circle()
-                            .fill(template.secondaryColor)
+                            .fill(Color(template.secondaryColor))
                             .frame(width: 20, height: 20)
                     )
                 
-                Text(template.displayName)
+                Text(LocalizedStringKey(template.displayName))
                     .font(.caption2)
                     .lineLimit(1)
                     .foregroundColor(.primary)
@@ -216,7 +216,15 @@ struct ShareCardView_Previews: PreviewProvider {
             session: SkiSession(
                 startTime: Date().addingTimeInterval(-3600),
                 locations: [
-                    SkiLocation(from: CLLocation(latitude: 40.3, longitude: 116.6, altitude: 500, horizontalAccuracy: 0, verticalAccuracy: 0, speed: 15, course: 0, timestamp: Date()))
+                    SkiLocation(from: CLLocation(
+                        coordinate: CLLocationCoordinate2D(latitude: 40.3, longitude: 116.6),
+                        altitude: 500,
+                        horizontalAccuracy: 0,
+                        verticalAccuracy: 0,
+                        course: 0,
+                        speed: 15,
+                        timestamp: Date()
+                    ))
                 ],
                 resortName: "南山滑雪场"
             )

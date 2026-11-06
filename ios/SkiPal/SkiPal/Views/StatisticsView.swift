@@ -127,7 +127,7 @@ struct OverviewItem: View {
                 }
             }
             
-            Text(label)
+            Text(LocalizedStringKey(label))
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -194,7 +194,7 @@ struct BestRow: View {
             HStack(spacing: 8) {
                 Image(systemName: icon)
                     .foregroundStyle(color)
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .foregroundStyle(.secondary)
             }
             
@@ -325,12 +325,12 @@ struct AchievementBadge: View {
                 .font(.system(size: 32))
                 .opacity(isUnlocked ? 1 : 0.3)
             
-            Text(achievement.title)
+            Text(LocalizedStringKey(achievement.title))
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundStyle(isUnlocked ? .primary : .secondary)
             
-            Text(achievement.description)
+            Text(LocalizedStringKey(achievement.description))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)

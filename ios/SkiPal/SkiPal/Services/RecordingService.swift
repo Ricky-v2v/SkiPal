@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import Combine
+import UIKit
 
 /// 记录状态
 enum RecordingState: Equatable {
@@ -88,7 +89,7 @@ class RecordingService: ObservableObject {
         startTimer()
         
         // 保持屏幕常亮
-        UIApplication.shared.isIdleTimerDisabled = true
+        setIdleTimerDisabled(true)
         
         print("✅ 开始记录滑雪")
     }
@@ -128,7 +129,7 @@ class RecordingService: ObservableObject {
             session = SkiSession(
                 startTime: startTime,
                 locations: currentPath,
-                resortName: detectedResort?.name
+                resortName: detectedResort?.localizedName
             )
             session?.endTime = Date()
             
@@ -142,7 +143,7 @@ class RecordingService: ObservableObject {
         pausedDuration = 0
         
         // 恢复屏幕自动锁定
-        UIApplication.shared.isIdleTimerDisabled = false
+        setIdleTimerDisabled(false)
         
         print("⏹️ 结束记录，雪场：\(detectedResort?.name ?? "未知")")
         return session
@@ -191,19 +192,21 @@ class RecordingService: ObservableObject {
         guard case .recording(let startTime) = state else { return }
         currentDuration = Date().timeIntervalSince(startTime) - pausedDuration
     }
+
+    private func setIdleTimerDisabled(_ disabled: Bool) {
+        if Thread.isMainThread {
+            MainActor.assumeIsolated {
+                UIApplication.shared.isIdleTimerDisabled = disabled
+            }
+        } else {
+            Task { @MainActor in
+                UIApplication.shared.isIdleTimerDisabled = disabled
+            }
+        }
+    }
     
     deinit {
         stopTimer()
-        UIApplication.shared.isIdleTimerDisabled = false
-    }
-}
-
-// MARK: - UIApplication 扩展
-import UIKit
-
-extension UIApplication {
-    static var isIdleTimerDisabled: Bool {
-        get { shared.isIdleTimerDisabled }
-        set { shared.isIdleTimerDisabled = newValue }
+        setIdleTimerDisabled(false)
     }
 }

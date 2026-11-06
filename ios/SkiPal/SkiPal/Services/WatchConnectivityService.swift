@@ -20,7 +20,7 @@ enum WatchMessageType: String, Codable {
 
     // 实时数据
     case locationUpdate
-    sessionData
+    case sessionData
 
     // 同步
     case requestSessionSync

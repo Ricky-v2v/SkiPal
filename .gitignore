@@ -32,3 +32,9 @@ Carthage/Build/
 *.provisionprofile
 *.xcuserstate
 secrets/
+
+# XcodeGen / xcodebuild 产物
+build/
+
+# Claude Code 本机覆盖配置（共享配置 settings.json 保留在库中）
+.claude/settings.local.json
