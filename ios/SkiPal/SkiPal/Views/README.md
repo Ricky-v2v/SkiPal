@@ -9,6 +9,7 @@ SwiftUI 界面，只做渲染与交互编排，不直接接触 `CLLocationManage
 | `SkiMapView.swift` | 轨迹地图 |
 | `HistoryView.swift` | 历史列表（含同步状态） |
 | `SessionDetailView.swift` | 会话详情与分享入口 |
+| `RunScoreSection.swift` | 会话详情页的滑行评分区（F1-UI） |
 | `ShareCardView.swift` | 分享卡片预览与生成 |
 | `StatisticsView.swift` | 统计概览与成就 |
 | `WeatherView.swift` | 雪场天气与预报 |

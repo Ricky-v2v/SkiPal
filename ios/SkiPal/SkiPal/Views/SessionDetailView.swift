@@ -4,6 +4,11 @@
 //
 //  会话详情 - 统计展示和分享
 //
+//  @Input      SkiSession、SkiSessionStore（删除）、RunScoreSection（评分区）
+//  @Output     SessionDetailView 及成就/统计/轨迹/分享/删除子视图
+//  @Pos        Views 层，历史会话详情页
+//  @UpdateRule 更新时同步更新此头及 Views/README.md
+//
 
 import SwiftUI
 
@@ -21,6 +26,9 @@ struct SessionDetailView: View {
                 VStack(spacing: 24) {
                     // 成就区域
                     AchievementSection(session: session)
+                    
+                    // 滑行评分（F1-UI）
+                    RunScoreSection(session: session)
                     
                     // 统计卡片
                     StatsSection(session: session)

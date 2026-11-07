@@ -1,6 +1,7 @@
 # @Input      ios/SkiPal 下的 SkiPal、SkiPalTests、WatchApp/WatchApp 源码目录
 # @Output     xcodegen generate 生成 SkiPal.xcodeproj（SkiPal、SkiPalWatch、SkiPalTests 三个 target）
 # @Pos        工程生成源；project.pbxproj 由此生成，不手改
+# 注意：各源码目录的 README.md 是文档，已在 excludes 中排除，避免被打包为资源
 # @UpdateRule 修改 target、设置或目录时同步此头、ios/SkiPal/README.md 与 docs/architecture.md
 name: SkiPal
 options:
@@ -28,6 +29,7 @@ targets:
         excludes:
           - "**/.DS_Store"
           - "**/._*"
+          - "**/README.md"
     settings:
       base:
         INFOPLIST_FILE: SkiPal/Info.plist
@@ -47,6 +49,7 @@ targets:
         excludes:
           - "**/.DS_Store"
           - "**/._*"
+          - "**/README.md"
     settings:
       base:
         INFOPLIST_FILE: WatchApp/WatchApp/Info.plist
@@ -61,6 +64,8 @@ targets:
     platform: iOS
     sources:
       - path: SkiPalTests
+        excludes:
+          - "**/README.md"
     dependencies:
       - target: SkiPal
     settings:

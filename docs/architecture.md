@@ -88,6 +88,7 @@ xcodebuild test -project SkiPal.xcodeproj -scheme SkiPal \
 ```
 
 - 模拟器名必须在本机存在（`xcrun simctl list devices available`）。CI 用 `iPhone 15`，较新的 Xcode 可能只带更新机型。
+- 各源码目录的 `README.md` 已在 `project.yml` 的 `excludes` 中排除；新增 target 或源码路径时同样排除，否则多个 README 被打包到同一路径导致构建失败。
 - `swift build` + `Package.swift` **不可用**：它以 macOS 为目标，编译 `LaunchScreen.storyboard` 时失败。请用 `xcodebuild`。
 - 测试 target 将 `PRODUCT_NAME` / `PRODUCT_MODULE_NAME` 覆盖为 `SkiPalTests`，以避免与 App 模块冲突（见 `project.yml`）。
 - `Info.plist` 手工维护（权限说明与 `SkiPalCloudKitContainerIdentifier` 键），所以 `project.yml` 故意没有 `info:` 段。

@@ -290,6 +290,9 @@
 "完整滑完至少一条雪道再结束记录，确保采集到连续的速度曲线。" = "Complete at least one full run before ending the session to capture a continuous speed curve.";
 "运动量过小或记录过短" = "Activity or recording was too short";
 "下次记录一段完整滑行（建议 20 米以上、两个以上有效定位点）再查看评分。" = "Record a complete run with at least two valid location points before checking your score.";
+"滑行评分" = "Run Score";
+"总分" = "Total";
+"数据不足，评分仅供参考" = "Not enough data. Score is for reference only.";
 "滑雪记录" = "Ski Session";
 "经典黑金" = "Classic Black & Gold";
 "清新蓝白" = "Fresh Blue & White";

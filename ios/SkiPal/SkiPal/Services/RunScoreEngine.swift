@@ -6,7 +6,7 @@
 //
 //  @Input      SkiSession（locations 的速度/时间、distance、duration、elevationGain）
 //  @Output     RunScoreEngine.score(for:) -> RunScoreResult（总分、三项分、三条 RunScoreAdvice）
-//  @Pos        Services 层纯逻辑引擎，PRD F1；目前未接入任何视图
+//  @Pos        Services 层纯逻辑引擎，PRD F1；由 Views/RunScoreSection 消费
 //  @UpdateRule 修改规则或接口时同步更新此头、Services/README.md 与 RunScoreEngineTests
 //
 //  设计目标：

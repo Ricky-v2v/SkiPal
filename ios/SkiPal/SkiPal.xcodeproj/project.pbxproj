@@ -42,6 +42,7 @@
 		A52576C2A6687CA0127DA4B2 /* SkiSession+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D107B4F3E8D1BF354A52D5 /* SkiSession+CloudKit.swift */; };
 		A92884DDA2B149F7FCC09582 /* WatchAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41553BD0A2A5C2E48AFA9D2A /* WatchAppDelegate.swift */; };
 		AD7E9562073515B1A5BD2269 /* SkiSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A5DFBE79C51637149E54C8 /* SkiSession.swift */; };
+		D2D93B83652EEE4856ADC9FF /* RunScoreSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9B955639762142D3867D73 /* RunScoreSection.swift */; };
 		E122FD650F612DE8ADD6A91F /* AICoachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675938F632FA8FF7BF37AB0 /* AICoachView.swift */; };
 		E8E2508D298EB941C9AF807A /* FallDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0259F8128FD6680F40693E08 /* FallDetector.swift */; };
 		EF20148721B68875034B2501 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FE57C8363FB210C8D936B7 /* HomeView.swift */; };
@@ -111,6 +112,7 @@
 		85DD04B3BB8141BE8E935449 /* AICoachService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AICoachService.swift; sourceTree = "<group>"; };
 		87327741EBB75DAE46E3A20E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B9F98F9A214E115388A63DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8C9B955639762142D3867D73 /* RunScoreSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunScoreSection.swift; sourceTree = "<group>"; };
 		901E0E552F5338B847C00D19 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		90C26C86B8225F6AF4841AC0 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		98E3B1AFFFD48174184F2D08 /* ski_resorts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ski_resorts.json; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				0A92C857F0429B77FD6F3A00 /* FallDetectionView.swift */,
 				901E0E552F5338B847C00D19 /* HistoryView.swift */,
 				16FE57C8363FB210C8D936B7 /* HomeView.swift */,
+				8C9B955639762142D3867D73 /* RunScoreSection.swift */,
 				3C47766B2C3CC566CBDE0AB6 /* SessionDetailView.swift */,
 				4E9ED2F5F9CB3EB79A84A59A /* ShareCardView.swift */,
 				4A7501207AB34ACEF3ABDE7E /* SkiCoachView.swift */,
@@ -415,6 +418,7 @@
 				12D2316B7C78F53C6E4204E0 /* LocationService.swift in Sources */,
 				03FAE3295E5D945DB2EE4784 /* RecordingService.swift in Sources */,
 				774C0DD73B01B3061BC77F04 /* RunScoreEngine.swift in Sources */,
+				D2D93B83652EEE4856ADC9FF /* RunScoreSection.swift in Sources */,
 				15B9A28CFEC22DC621BC593D /* SessionDetailView.swift in Sources */,
 				5B3DEBB915719C39999F039A /* ShareCardGenerator.swift in Sources */,
 				1C91AAD2596C4ACDF5FA4D13 /* ShareCardService.swift in Sources */,
